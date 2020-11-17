@@ -1,0 +1,51 @@
+.infoBox {
+  margin: 7px;
+}
+
+.infoBox__button {
+  border-radius: 15px;
+  background-color: rgb(150, 150, 150);
+  border: none;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  width: 100%;
+  max-width: 90px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 5px rgb(110, 110, 110);
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.infoBox__button:hover {
+  background-color: rgb(131, 131, 131);
+}
+
+.infoBox__button:active {
+  box-shadow: 0 1.5px rgb(90, 90, 90);
+  transform: translateY(4px);
+}
+
+/* .infoBox__button span {
+    display: inline-block;
+    position: relative;
+    transition: 0.09s;
+  }
+  
+  .infoBox__button:hover span {
+    padding-right: 25px;
+  }
+  
+  .infoBox__button span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0s;
+  }
+  
+  .infoBox__button:hover span:after {
+    opacity: 1;
+    right: 0;
+  } */

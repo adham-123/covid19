@@ -1,0 +1,160 @@
+* {
+  margin: 0;
+}
+
+.app {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  padding-top: 5px;
+}
+
+.app__infoBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.app__body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.app__map_wrapper {
+  position: relative;
+  height: 302px;
+  width: 400px;
+  /* border: 1px solid rgb(199, 199, 199); */
+  flex-grow: 0.9;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(230, 230, 230);
+}
+.gm-style-iw > button {
+  display: none !important;
+}
+.map_image {
+  height: 20px;
+  width: 40px;
+  border: none;
+}
+
+.app__dataLayout {
+  position: relative;
+  width: 965px;
+  height: fit-content;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.app__graph {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 10px;
+}
+.app__graph_graph {
+  position: relative;
+  height: 270px;
+}
+.linegraph__graphbuttons {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.linegraph__graphbuttons > button {
+  margin-left: 9px;
+}
+
+@media screen and (max-width: 1410px) {
+  .app__body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app__dataLayout {
+    position: relative;
+    width: 100%;
+  }
+
+  .app__graph {
+    order: 2;
+  }
+
+  .app__dataLayout {
+    order: 1;
+  }
+
+  .app__map_wrapper {
+    order: 3;
+  }
+
+  .app__map_wrapper {
+    width: 500px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .app__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app__map_wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .app {
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .app {
+    padding: 0px;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .app {
+    max-width: 1500px;
+  }
+}
+
+/* Custom Scrollbar width */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(201, 201, 201);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(121, 121, 121);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(70, 70, 70);
+}

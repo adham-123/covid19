@@ -1,0 +1,13 @@
+.slidecontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.slider {
+  width: 100%;
+  cursor: pointer;
+  height: 5px;
+}
