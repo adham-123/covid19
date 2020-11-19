@@ -83,8 +83,8 @@
   z-index: 10;
 }
 
-.sticky > .app__dataLayout {
-  margin-top: 102px;
+.sticky .app__dataLayout {
+  padding-top: 502px;
 }
 
 @media screen and (max-width: 1410px) {
