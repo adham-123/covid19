@@ -77,16 +77,6 @@
   margin-left: 9px;
 }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  z-index: 10;
-}
-
-.bodyExtension {
-  padding-top: 50px;
-}
-
 @media screen and (max-width: 1410px) {
   .app__body {
     flex-direction: column;
@@ -131,6 +121,23 @@
 @media screen and (max-width: 500px) {
   .app {
     padding: 5px;
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: rgb(230, 230, 230);
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .bodyExtension {
+    padding-top: 50px;
   }
 }
 
