@@ -152,7 +152,7 @@ function App() {
         />
       </div>
       <div className="app__body">
-        <div className="app__dataLayout">
+        <div className="app__dataLayout" id="bodyExtension">
           <DataLayout
             country={country}
             countries={countries}

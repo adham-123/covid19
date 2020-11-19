@@ -10,11 +10,15 @@ function Header(props) {
 
   const stickyFunction = () => {
     var header = document.getElementById("myHeader");
+    var body = document.getElementById("bodyExtension");
+
     var sticky = header.offsetTop;
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");
+      body.classList.add("bodyExtension");
     } else {
       header.classList.remove("sticky");
+      body.classList.remove("bodyExtension");
     }
   };
 
