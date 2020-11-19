@@ -7,6 +7,17 @@ import "../../Styling/header.css";
 
 function Header(props) {
   const c = props.countries.find((c) => c.name === "WorldWide");
+
+  const stickyFunction = () => {
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
+    }
+  };
+
   return (
     <div className="header">
       <button
@@ -34,7 +45,7 @@ function Header(props) {
         className="header_image"
       />
 
-      <div className="header__dd_img">
+      <div className="header__dd_img" id="myHeader">
         <div className="header__right">
           <DropDown
             countries={props.countries}
@@ -67,6 +78,11 @@ function Header(props) {
           />
         </div>
       </div>
+      {
+        (window.onscroll = () => {
+          stickyFunction();
+        })
+      }
     </div>
   );
 }
