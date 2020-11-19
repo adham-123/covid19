@@ -77,6 +77,16 @@
   margin-left: 9px;
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
+.sticky > .app__dataLayout {
+  margin-top: 102px;
+}
+
 @media screen and (max-width: 1410px) {
   .app__body {
     flex-direction: column;
