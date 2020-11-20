@@ -87,6 +87,7 @@ function App() {
 
     if (countryS !== undefined) {
       setCountry(countryS);
+      document.activeElement.blur();
     }
   };
 
