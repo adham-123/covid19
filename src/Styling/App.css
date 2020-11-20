@@ -100,23 +100,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
-  .app__body {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .app__map_wrapper {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .app {
-    padding: 5px;
-  }
-
+@media screen and (max-width: 900px) {
   .sticky {
     position: fixed;
     top: 0;
@@ -133,7 +117,25 @@
   }
 
   .bodyExtension {
-    padding-top: 50px;
+    padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .app__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app__map_wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .app {
+    padding: 5px;
   }
 }
 
