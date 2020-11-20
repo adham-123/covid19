@@ -11,6 +11,7 @@ function InfoBox(props) {
     backgroundColor: props.bcolor,
     boxShadow: props.shadow,
     margin: props.margin,
+    fontSize: props.fontSize,
   };
 
   if (props.active) {
@@ -21,7 +22,7 @@ function InfoBox(props) {
       borderRadius: props.radius,
       backgroundColor: props.bcolor,
       margin: props.margin,
-      // fontSize: "24px",
+      fontSize: props.fontSize,
     };
   }
 
