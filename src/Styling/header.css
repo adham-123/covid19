@@ -3,7 +3,7 @@
   justify-content: space-between;
   flex-direction: row;
   background-color: rgb(230, 230, 230);
-  padding: 10px 10px;
+  padding: 10px 50px;
   border-radius: 10px;
 }
 
@@ -40,6 +40,7 @@
   font-size: 16px;
   border: none;
   outline: none;
+  margin-top: 10px;
 }
 
 .header__dropbtn:hover {
@@ -60,7 +61,7 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding: 20px 10px;
+    padding: 10px;
     flex-wrap: wrap;
   }
 
@@ -68,18 +69,31 @@
     margin-left: 5px;
     margin-right: 5px;
   }
+
+  .header__dropbtn {
+    height: 8px;
+  }
 }
 
 @media screen and (max-width: 500px) {
   .header {
-    display: flex;
-    align-items: center;
-    position: relative;
+    padding: 5px;
   }
 
   .header_image {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .header_image {
+    height: 40px;
+    width: 90px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .header__title {
+    padding: 0px;
   }
 }
 

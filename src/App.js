@@ -151,8 +151,8 @@ function App() {
           setCountry={setCountry}
         />
       </div>
-      <div className="app__body">
-        <div className="app__dataLayout" id="bodyExtension">
+      <div className="app__body" id="bodyExtension">
+        <div className="app__dataLayout" >
           <DataLayout
             country={country}
             countries={countries}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 const clearInput = () => {
   document.getElementById("myInput").value = null;
@@ -15,14 +15,17 @@ function DropDown(props) {
   return (
     <div className="header__dropdown">
       <input
+        type="text"
         size="8"
+        name="myInput"
         id="myInput"
         list="dropdown__countries"
         className="header__dropbtn"
         placeholder="Search Country"
         onChange={props.changeCountry}
         onFocus={() => clearInput()}
-        onClick={() => clearInput()}
+        // onClick={() => clearInput()}
+        onSelect={document.activeElement.blur()}
         onBlur={() => fillInput(props.country.name)}
       />
       <datalist id="dropdown__countries">
