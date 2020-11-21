@@ -16,7 +16,8 @@ function Header(props) {
     if (window.pageYOffset > sticky) {
       header.classList.add("sticky");
       body.classList.add("bodyExtension");
-    } else {
+    }
+    if (window.pageYOffset < 40) {
       header.classList.remove("sticky");
       body.classList.remove("bodyExtension");
     }

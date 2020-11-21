@@ -71,7 +71,7 @@
   margin-left: 9px;
 }
 
-.app__footer{
+.app__footer {
   display: flex;
 }
 
@@ -114,7 +114,6 @@
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    transition: 0.5s;
     padding: 4px;
     padding-top: 5px;
     box-shadow: 1px 5px 5px rgba(32, 32, 32, 0.6);

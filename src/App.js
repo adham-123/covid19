@@ -20,7 +20,6 @@ function App() {
   const [dataShowing, setDataShowing] = useState("all"); //map today/all
 
   const isMobile = useWindowSize();
-  console.log(isMobile);
 
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
