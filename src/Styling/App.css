@@ -2,10 +2,6 @@
   margin: 0;
 }
 
-*:focus {
-  -webkit-tap-highlight-color: transparent;
-}
-
 .app {
   padding: 20px;
   display: flex;

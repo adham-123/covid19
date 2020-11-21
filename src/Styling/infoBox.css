@@ -26,6 +26,10 @@
   transform: translateY(4px);
 }
 
+.infoBox__button:focus {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* .infoBox__button span {
     display: inline-block;
     position: relative;
