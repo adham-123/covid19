@@ -24,6 +24,7 @@ function DropDown(props) {
         placeholder="Search Country"
         onChange={props.changeCountry}
         onFocus={() => clearInput()}
+        onDoubleClick={() => clearInput()}
         onBlur={() => fillInput(props.country.name)}
       />
       <datalist id="dropdown__countries">
