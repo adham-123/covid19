@@ -13,11 +13,11 @@ function Header(props) {
     var body = document.getElementById("bodyExtension");
 
     var sticky = header.offsetTop;
-    if (window.pageYOffset > sticky) {
+    if (window.pageYOffset > 0) {
       header.classList.add("sticky");
       body.classList.add("bodyExtension");
     }
-    if (window.pageYOffset < 40) {
+    if (window.pageYOffset < 45) {
       header.classList.remove("sticky");
       body.classList.remove("bodyExtension");
     }

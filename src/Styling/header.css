@@ -11,7 +11,7 @@
 .header__dd_img {
   display: flex;
   flex-direction: row;
-  transition: 0.5s;
+  transition: 0.1s;
 }
 
 .header__infoBox {
