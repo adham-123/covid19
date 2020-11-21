@@ -71,6 +71,10 @@
   margin-left: 9px;
 }
 
+.app__footer{
+  display: flex;
+}
+
 @media screen and (max-width: 1410px) {
   .app__body {
     flex-direction: column;

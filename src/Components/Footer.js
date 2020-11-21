@@ -9,7 +9,7 @@ function Footer() {
         Contact me:{" "}
         <a href="mailto: adham@adhamnasr.com">adham@adhamnasr.com</a>
       </p>
-      <p style={{ fontSize: "12px" }}>Copyright&copy; 2020</p>
+      <p style={{ fontSize: "11px" }}>Copyright&copy; 2020</p>
     </div>
   );
 }

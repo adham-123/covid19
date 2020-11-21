@@ -220,7 +220,7 @@ function App() {
           />
         </div>
       </div>
-      <div>
+      <div className="app__footer">
         <Footer />
       </div>
     </div>
