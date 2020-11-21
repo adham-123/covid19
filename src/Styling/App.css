@@ -117,6 +117,7 @@
     padding: 4px;
     padding-top: 5px;
     box-shadow: 1px 5px 5px rgba(32, 32, 32, 0.6);
+    transition: 0.2s;
   }
 
   .bodyExtension {
