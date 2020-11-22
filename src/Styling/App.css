@@ -114,14 +114,12 @@
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    padding: 4px;
-    padding-top: 5px;
     box-shadow: 1px 5px 5px rgba(32, 32, 32, 0.6);
-    transition: 0.2s;
+    transition: 0.5s;
   }
 
   .bodyExtension {
-    padding-top: 40px;
+    padding-top: 50px;
   }
 }
 
