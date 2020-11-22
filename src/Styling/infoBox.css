@@ -23,7 +23,7 @@
 
 .infoBox__button:active {
   box-shadow: 0 1.5px rgb(90, 90, 90);
-  transform: translateY(4px);
+  transform: translateY(3px);
 }
 
 .infoBox__button:focus {
