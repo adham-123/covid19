@@ -19,4 +19,3 @@ ReactDOM.render(
 // Check out why the map circles load twice when deaths selected. Maybe cuz "cases" is set to default
 
 // total button not centered on apple
-//table header not sticky on apple

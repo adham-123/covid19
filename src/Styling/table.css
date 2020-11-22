@@ -46,7 +46,7 @@ tr:nth-child(even) {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
   height: 5px;
 }
 

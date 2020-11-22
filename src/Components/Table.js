@@ -67,12 +67,11 @@ function Table({ dataShowing, ...props }) {
 
       <div className="table__data">
         <table>
-          <tbody>
-            <tr colSpan="3">
+          <thead>
+            <tr>
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
                 onClick={() => props.setSortType("countries")}
@@ -86,7 +85,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
                 onClick={
@@ -110,7 +108,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
                 onClick={
@@ -134,7 +131,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
                 onClick={
@@ -158,7 +154,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
                 onClick={() => props.setSortType("active")}
@@ -172,7 +167,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
               >
@@ -181,7 +175,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
               >
@@ -190,7 +183,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
               >
@@ -199,7 +191,6 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
               >
@@ -208,14 +199,14 @@ function Table({ dataShowing, ...props }) {
               <th
                 style={{
                   position: "sticky",
-                  position: "-webkit-sticky",
                   top: 0,
                 }}
               >
                 Test/Person
               </th>
             </tr>
-
+          </thead>
+          <tbody>
             {props.countries.map((country) =>
               dataShowing === "all" ? (
                 <tr key={country.name} id={country.name}>
