@@ -115,7 +115,7 @@
     flex-direction: row;
     width: 100%;
     box-shadow: 1px 5px 5px rgba(32, 32, 32, 0.6);
-    transition: 0.5s;
+    /* transition: 0.5s; */
   }
 
   .bodyExtension {
@@ -144,6 +144,7 @@
 @media screen and (max-width: 320px) {
   .app {
     padding: 0px;
+    padding-top: 5px;
   }
 }
 
