@@ -118,6 +118,15 @@
     /* transition: 0.5s; */
   }
 
+  .headerSticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgb(230, 230, 230);
+    box-shadow: 1px 5px 5px rgba(32, 32, 32, 0.6);
+    /* transition: 0.5s; */
+  }
+
   .bodyExtension {
     padding-top: 50px;
   }

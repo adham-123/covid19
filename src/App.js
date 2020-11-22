@@ -172,7 +172,7 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__header">
+      <div className="app__header" id="header">
         <Header
           countries={countries}
           changeCountry={onChange}

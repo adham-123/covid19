@@ -10,16 +10,20 @@ function Header(props) {
 
   const stickyFunction = () => {
     var header = document.getElementById("myHeader");
+    var wholeHeader = document.getElementById("header");
     var body = document.getElementById("bodyExtension");
-
     var sticky = header.offsetTop;
-    console.log(sticky)
-    if (window.pageYOffset < 50) {
-      header.classList.remove("sticky");
-      body.classList.remove("bodyExtension");
+
+    if (props.isMobile.width < 710) {
+      if (window.pageYOffset < 50) {
+        header.classList.remove("sticky");
+        body.classList.remove("bodyExtension");
+      } else {
+        header.classList.add("sticky");
+        body.classList.add("bodyExtension");
+      }
     } else {
-      header.classList.add("sticky");
-      body.classList.add("bodyExtension");
+      wholeHeader.classList.add("headerSticky");
     }
   };
 
