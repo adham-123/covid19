@@ -64,7 +64,7 @@ function Header(props) {
             content="Cases"
             active={props.casesType === "cases"}
             click={() => props.setCasesType("cases")}
-            padding={props.isMobile.width < 360 ? "3px" : "10px"}
+            padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(225, 0, 0)"
             margin="1px"
             fontSize={props.isMobile.width < 420 ? "12px" : "15px"}
@@ -73,7 +73,7 @@ function Header(props) {
             content="Recovered"
             active={props.casesType === "recovered"}
             click={() => props.setCasesType("recovered")}
-            padding={props.isMobile.width < 360 ? "3px" : "10px"}
+            padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(70, 250, 70)"
             margin="1px"
             fontSize={props.isMobile.width < 420 ? "12px" : "15px"}
@@ -82,7 +82,7 @@ function Header(props) {
             content="Deaths"
             active={props.casesType === "deaths"}
             click={() => props.setCasesType("deaths")}
-            padding={props.isMobile.width < 360 ? "3px" : "10px"}
+            padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(50, 50, 50)"
             margin="1px"
             fontSize={props.isMobile.width < 420 ? "12px" : "15px"}
