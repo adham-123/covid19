@@ -17,3 +17,7 @@ ReactDOM.render(
 // When a country is selected table scrolls to that country and highlights raw
 // Title style "Covid 19 Tracker"
 // Check out why the map circles load twice when deaths selected. Maybe cuz "cases" is set to default
+
+// total button not centered on apple
+//table header not sticky on apple
+//get maps to stay up on smaller screen

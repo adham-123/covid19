@@ -65,14 +65,15 @@
 .datalayout__table {
   position: relative;
   height: 260px;
-  width: 540px;
+  width: 200px;
+  flex-grow: 0.95;
 }
 
-@media screen and (max-width: 1410px) {
+/* @media screen and (max-width: 1070px) {
   .datalayout__table {
     width: 55vw;
   }
-}
+} */
 
 @media screen and (max-width: 980px) {
   .dataLayout {
