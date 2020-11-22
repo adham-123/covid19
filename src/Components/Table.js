@@ -57,7 +57,7 @@ function Table({ dataShowing, ...props }) {
           content="Today"
           click={() => props.setDataShowing("today")}
           onFocus={() => props.setSortType("")}
-          width="50px"
+          width="60px"
           margin="0px"
           active={dataShowing === "today"}
           color="rgb(40, 40, 40)"
