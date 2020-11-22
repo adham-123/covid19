@@ -71,6 +71,7 @@ function Table({ dataShowing, ...props }) {
             <tr>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -84,6 +85,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -107,6 +109,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -130,6 +133,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -153,6 +157,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -166,6 +171,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -174,6 +180,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -182,6 +189,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -190,6 +198,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
@@ -198,6 +207,7 @@ function Table({ dataShowing, ...props }) {
               </th>
               <th
                 style={{
+                  position: "-webkit-sticky",
                   position: "sticky",
                   top: 0,
                 }}
