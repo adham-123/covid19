@@ -66,11 +66,15 @@ function Table({ dataShowing, ...props }) {
       </span>
 
       <div className="table__data">
-        <table style={{ position: "relative" }}>
+        <table>
           <tbody>
             <tr colSpan="3">
               <th
-                style={{ position: "sticky", top: 0 }}
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
                 onClick={() => props.setSortType("countries")}
               >
                 {props.sortType === "countries" ? (
@@ -80,7 +84,11 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{ position: "sticky", top: 0 }}
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("cases")
@@ -100,7 +108,11 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{ position: "sticky", top: 0 }}
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("recovered")
@@ -120,7 +132,11 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{ position: "sticky", top: 0 }}
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("deaths")
@@ -140,7 +156,11 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{ position: "sticky", top: 0 }}
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
                 onClick={() => props.setSortType("active")}
               >
                 {props.sortType === "active" ? (
@@ -149,11 +169,51 @@ function Table({ dataShowing, ...props }) {
                   <span>Active</span>
                 )}
               </th>
-              <th style={{ position: "sticky", top: 0 }}>Critical</th>
-              <th style={{ position: "sticky", top: 0 }}>Tests</th>
-              <th style={{ position: "sticky", top: 0 }}>Case/Person</th>
-              <th style={{ position: "sticky", top: 0 }}>Death/Person</th>
-              <th style={{ position: "sticky", top: 0 }}>Test/Person</th>
+              <th
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
+              >
+                Critical
+              </th>
+              <th
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
+              >
+                Tests
+              </th>
+              <th
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
+              >
+                Case/Person
+              </th>
+              <th
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
+              >
+                Death/Person
+              </th>
+              <th
+                style={{
+                  position: "sticky",
+                  position: "-webkit-sticky",
+                  top: 0,
+                }}
+              >
+                Test/Person
+              </th>
             </tr>
 
             {props.countries.map((country) =>

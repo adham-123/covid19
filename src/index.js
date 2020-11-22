@@ -20,4 +20,3 @@ ReactDOM.render(
 
 // total button not centered on apple
 //table header not sticky on apple
-//get maps to stay up on smaller screen
