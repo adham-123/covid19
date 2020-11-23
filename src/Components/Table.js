@@ -69,14 +69,7 @@ function Table({ dataShowing, ...props }) {
         <table>
           <thead>
             <tr>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-                onClick={() => props.setSortType("countries")}
-              >
+              <th onClick={() => props.setSortType("countries")}>
                 {props.sortType === "countries" ? (
                   <p>Country ▾</p>
                 ) : (
@@ -84,11 +77,6 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("cases")
@@ -108,11 +96,6 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("recovered")
@@ -132,11 +115,6 @@ function Table({ dataShowing, ...props }) {
                 )}
               </th>
               <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
                 onClick={
                   dataShowing === "all"
                     ? () => props.setSortType("deaths")
@@ -155,65 +133,18 @@ function Table({ dataShowing, ...props }) {
                   <span>Deaths</span>
                 )}
               </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-                onClick={() => props.setSortType("active")}
-              >
+              <th onClick={() => props.setSortType("active")}>
                 {props.sortType === "active" ? (
                   <p>Active ▾</p>
                 ) : (
                   <span>Active</span>
                 )}
               </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-              >
-                Critical
-              </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-              >
-                Tests
-              </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-              >
-                Case/Person
-              </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-              >
-                Death/Person
-              </th>
-              <th
-                style={{
-                  position: "-webkit-sticky",
-                  position: "sticky",
-                  top: 0,
-                }}
-              >
-                Test/Person
-              </th>
+              <th>Critical</th>
+              <th>Tests</th>
+              <th>Case/Person</th>
+              <th>Death/Person</th>
+              <th>Test/Person</th>
             </tr>
           </thead>
           <tbody>
