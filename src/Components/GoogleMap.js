@@ -82,7 +82,7 @@ function CircleComponent({
     <Circle
       center={country.center}
       options={selectedOptions}
-      radius={(Math.sqrt(selectedType) * 1000) / currentZoom}
+      radius={(Math.sqrt(selectedType) * 600) / currentZoom}
       onMouseOver={onCircleClick}
       onMouseOut={onClose}
       clickable
