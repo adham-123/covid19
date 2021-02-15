@@ -106,11 +106,8 @@ function Maps(props) {
   const nf = new Intl.NumberFormat();
 
   return (
-    //googleMapsApiKey="AIzaSyCMRjHwAlEnUxC9Qg8caRtTnkWKHvzj1wI"
-    <LoadScript
-      googleMapsApiKey="AIzaSyA0qwEl7BqF71zcbmOvKq67ZgmPJNB47AM"
-      googleMapsClientId="b16c2d548c77ab9e"
-    >
+    //googleMapsApiKey="AIzaSyA0qwEl7BqF71zcbmOvKq67ZgmPJNB47AM"
+    <LoadScript>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={props.country.center}
