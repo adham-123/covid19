@@ -47,9 +47,9 @@ function CircleComponent({
       zIndex: 1,
     },
     deathsOptions: {
-      strokeColor: "rgba(70, 70, 70)",
+      strokeColor: "rgba(20, 20, 20)",
       strokeWeight: 1.5,
-      fillColor: "rgba(100, 100, 100)",
+      fillColor: "rgba(0, 0, 0)",
       fillOpacity: 0.35,
       clickable: true,
       draggable: false,
