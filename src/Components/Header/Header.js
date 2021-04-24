@@ -11,6 +11,7 @@ import {
   casesTypeCases,
   casesTypeDeaths,
   casesTypeRecovered,
+  sortTable,
 } from "../../redux/ducks/conRender";
 
 function Header(props) {
@@ -45,7 +46,7 @@ function Header(props) {
           dispatch(casesTypeCases()),
           props.setDataShowing("all"),
           props.setGraphSlider({ value: "200" }),
-          props.setSortType(""),
+          dispatch(sortTable({ sortType: "" })),
           c !== undefined ? props.setCountry(c) : null
         )}
         style={{

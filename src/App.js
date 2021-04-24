@@ -9,11 +9,12 @@ import Slider from "./Components/Slider.js";
 import DataLayout from "./Components/DataLayout";
 import Map from "./Components/Map";
 import Footer from "./Components/Footer";
+import { useSelector } from "react-redux";
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState({});
-  const [sortType, setSortType] = useState("");
+  const sortType = useSelector((state) => state.conRender.sortingType);
   const [graphSlider, setGraphSlider] = useState({ value: "200" });
   const [graphsliderMax, setGraphSliderMax] = useState("300");
   const [dataShowing, setDataShowing] = useState("all"); //map today/all
@@ -178,7 +179,6 @@ function App() {
           country={country}
           setDataShowing={setDataShowing}
           setGraphSlider={setGraphSlider}
-          setSortType={setSortType}
           setCountry={setCountry}
           isMobile={isMobile}
         />
@@ -188,8 +188,6 @@ function App() {
           <DataLayout
             country={country}
             countries={countries}
-            setSortType={setSortType}
-            sortType={sortType}
             dataShowing={dataShowing}
             setDataShowing={setDataShowing}
           />
