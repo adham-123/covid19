@@ -13,7 +13,6 @@ import Footer from "./Components/Footer";
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState({});
-  const [casesType, setCasesType] = useState("cases");
   const [sortType, setSortType] = useState("");
   const [graphSlider, setGraphSlider] = useState({ value: "200" });
   const [graphsliderMax, setGraphSliderMax] = useState("300");
@@ -177,8 +176,6 @@ function App() {
           countries={countries}
           changeCountry={onChange}
           country={country}
-          casesType={casesType}
-          setCasesType={setCasesType}
           setDataShowing={setDataShowing}
           setGraphSlider={setGraphSlider}
           setSortType={setSortType}
@@ -191,7 +188,6 @@ function App() {
           <DataLayout
             country={country}
             countries={countries}
-            casesType={casesType}
             setSortType={setSortType}
             sortType={sortType}
             dataShowing={dataShowing}
@@ -199,12 +195,11 @@ function App() {
           />
         </div>
         <div className="app__map_wrapper">
-          <Map countries={countries} country={country} casesType={casesType} />
+          <Map countries={countries} country={country} />
         </div>
         <div className="app__graph">
           <div className="app__graph_graph">
             <LineGraph
-              casesType={casesType}
               country={country}
               setCountry={setCountry}
               graphSlider={graphSlider}

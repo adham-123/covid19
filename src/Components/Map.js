@@ -2,11 +2,14 @@ import React from "react";
 
 import Maps from "./GoogleMap.js";
 
+import { useSelector } from "react-redux";
+
 function Map(props) {
+  const casesType = useSelector((state) => state.conRender.casesType);
   const color =
-    props.casesType === "cases"
+    casesType === "cases"
       ? "rgba(200, 20, 50, 0.5)"
-      : props.casesType === "recovered"
+      : casesType === "recovered"
       ? "rgba(0, 200, 50, 0.5)"
       : "rgba(100, 100, 100, 0.5)";
 
@@ -19,15 +22,13 @@ function Map(props) {
         }}
       >
         <p style={{ display: "inline" }}>Map of </p>
-        <h3 style={{ display: "inline", color: color }}>{props.casesType}</h3>
+        <h3 style={{ display: "inline", color: color }}>{casesType}</h3>
       </div>
-      <div
-        style={{ position: "relative", height: "250px", width: "100%" }}
-      >
+      <div style={{ position: "relative", height: "250px", width: "100%" }}>
         <Maps
           countries={props.countries}
           country={props.country}
-          casesType={props.casesType}
+          casesType={casesType}
         />
       </div>
 

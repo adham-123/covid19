@@ -3,6 +3,8 @@ import { Line } from "react-chartjs-2";
 
 import InfoBox from "./InfoBox";
 
+import { useSelector } from "react-redux";
+
 const nf = new Intl.NumberFormat();
 
 const options = {
@@ -66,12 +68,13 @@ const options = {
   },
 };
 
-function LineGraph({ country, casesType, ...props }) {
+function LineGraph({ country, ...props }) {
   const [chartData, setChartData] = useState([]);
   const [dataTotal, setDataTotal] = useState([]);
   const [daily, setDaily] = useState(true);
   const [cName, setCName] = useState("Loading...");
   const [total, setTotal] = useState({});
+  const casesType = useSelector((state) => state.conRender.casesType);
 
   const buildChartData = (data, casesType = "cases") => {
     if (data) {

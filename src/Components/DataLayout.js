@@ -26,7 +26,6 @@ function nFormatter(num) {
 function DataLayout({
   country,
   countries,
-  casesType,
   sortType,
   setSortType,
   setDataShowing,
