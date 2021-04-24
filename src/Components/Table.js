@@ -5,13 +5,14 @@ import InfoBox from "./InfoBox";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { sortTable } from "../redux/ducks/conRender";
+import { showTodayData, sortTable } from "../redux/ducks/conRender";
 
 const nf = new Intl.NumberFormat();
 
-function Table({ dataShowing, ...props }) {
+function Table({ ...props }) {
   const dispatch = useDispatch();
   const sortingType = useSelector((state) => state.conRender.sortingType);
+  const dataShowing = useSelector((state) => state.conRender.dataShowing);
   // useEffect(() => {
   //   return function scrollTable() {
   //     var elem = document.getElementById(props.country.name);
@@ -51,7 +52,7 @@ function Table({ dataShowing, ...props }) {
       >
         <InfoBox
           content="All"
-          click={() => props.setDataShowing("all")}
+          click={() => dispatch(showTodayData({ dataShow: "all" }))}
           onFocus={() => dispatch(sortTable({ sortType: "" }))}
           width="50px"
           margin="0px"
@@ -61,7 +62,7 @@ function Table({ dataShowing, ...props }) {
         />
         <InfoBox
           content="Today"
-          click={() => props.setDataShowing("today")}
+          click={() => dispatch(showTodayData({ dataShow: "today" }))}
           onFocus={() => dispatch(sortTable({ sortType: "" }))}
           width="60px"
           margin="0px"

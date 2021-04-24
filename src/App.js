@@ -17,7 +17,6 @@ function App() {
   const sortType = useSelector((state) => state.conRender.sortingType);
   const [graphSlider, setGraphSlider] = useState({ value: "200" });
   const [graphsliderMax, setGraphSliderMax] = useState("300");
-  const [dataShowing, setDataShowing] = useState("all"); //map today/all
 
   const isMobile = useWindowSize();
 
@@ -177,7 +176,6 @@ function App() {
           countries={countries}
           changeCountry={onChange}
           country={country}
-          setDataShowing={setDataShowing}
           setGraphSlider={setGraphSlider}
           setCountry={setCountry}
           isMobile={isMobile}
@@ -188,8 +186,6 @@ function App() {
           <DataLayout
             country={country}
             countries={countries}
-            dataShowing={dataShowing}
-            setDataShowing={setDataShowing}
           />
         </div>
         <div className="app__map_wrapper">

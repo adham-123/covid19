@@ -5,6 +5,7 @@ const conRender = createSlice({
   initialState: {
     casesType: "cases",
     sortingType: "",
+    dataShowing: "all",
   },
   reducers: {
     casesTypeCases: (state) => {
@@ -20,6 +21,10 @@ const conRender = createSlice({
       const { sortType } = action.payload;
       state.sortingType = sortType;
     },
+    showTodayData: (state, action) => {
+      const { dataShow } = action.payload;
+      state.dataShowing = dataShow;
+    },
   },
 });
 
@@ -28,6 +33,7 @@ export const {
   casesTypeRecovered,
   casesTypeDeaths,
   sortTable,
+  showTodayData,
 } = conRender.actions;
 
 export default conRender.reducer;
