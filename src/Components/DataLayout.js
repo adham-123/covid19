@@ -23,15 +23,7 @@ function nFormatter(num) {
   );
 }
 
-function DataLayout({
-  country,
-  countries,
-  casesType,
-  sortType,
-  setSortType,
-  setDataShowing,
-  dataShowing,
-}) {
+function DataLayout({ country, countries }) {
   return (
     <div className="dataLayout">
       <div className="datalayout__overview">
@@ -170,10 +162,6 @@ function DataLayout({
         <Table
           countries={countries}
           country={country}
-          setSortType={setSortType}
-          sortType={sortType}
-          setDataShowing={setDataShowing}
-          dataShowing={dataShowing}
         />
       </div>
       {/* <div className="datalayout__graph_pie">

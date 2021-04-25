@@ -9,15 +9,13 @@ import Slider from "./Components/Slider.js";
 import DataLayout from "./Components/DataLayout";
 import Map from "./Components/Map";
 import Footer from "./Components/Footer";
+import { useSelector } from "react-redux";
 
 function App() {
+  const sortType = useSelector((state) => state.conRender.sortingType);
+
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState({});
-  const [casesType, setCasesType] = useState("cases");
-  const [sortType, setSortType] = useState("");
-  const [graphSlider, setGraphSlider] = useState({ value: "200" });
-  const [graphsliderMax, setGraphSliderMax] = useState("300");
-  const [dataShowing, setDataShowing] = useState("all"); //map today/all
 
   const isMobile = useWindowSize();
 
@@ -177,46 +175,22 @@ function App() {
           countries={countries}
           changeCountry={onChange}
           country={country}
-          casesType={casesType}
-          setCasesType={setCasesType}
-          setDataShowing={setDataShowing}
-          setGraphSlider={setGraphSlider}
-          setSortType={setSortType}
           setCountry={setCountry}
           isMobile={isMobile}
         />
       </div>
       <div className="app__body" id="bodyExtension">
         <div className="app__dataLayout">
-          <DataLayout
-            country={country}
-            countries={countries}
-            casesType={casesType}
-            setSortType={setSortType}
-            sortType={sortType}
-            dataShowing={dataShowing}
-            setDataShowing={setDataShowing}
-          />
+          <DataLayout country={country} countries={countries} />
         </div>
         <div className="app__map_wrapper">
-          <Map countries={countries} country={country} casesType={casesType} />
+          <Map countries={countries} country={country} />
         </div>
         <div className="app__graph">
           <div className="app__graph_graph">
-            <LineGraph
-              casesType={casesType}
-              country={country}
-              setCountry={setCountry}
-              graphSlider={graphSlider}
-              setGraphSlider={setGraphSlider}
-              setSliderMax={setGraphSliderMax}
-            />
+            <LineGraph country={country} setCountry={setCountry} />
           </div>
-          <Slider
-            graphSlider={graphSlider}
-            setGraphSlider={setGraphSlider}
-            sliderMax={graphsliderMax}
-          />
+          <Slider />
         </div>
       </div>
       <div className="app__footer">

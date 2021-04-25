@@ -3,9 +3,16 @@ import React, { useState } from "react";
 import "../Styling/table.css";
 import InfoBox from "./InfoBox";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import { showTodayData, sortTable } from "../redux/ducks/conRender";
+
 const nf = new Intl.NumberFormat();
 
-function Table({ dataShowing, ...props }) {
+function Table({ ...props }) {
+  const dispatch = useDispatch();
+  const sortingType = useSelector((state) => state.conRender.sortingType);
+  const dataShowing = useSelector((state) => state.conRender.dataShowing);
   // useEffect(() => {
   //   return function scrollTable() {
   //     var elem = document.getElementById(props.country.name);
@@ -45,8 +52,8 @@ function Table({ dataShowing, ...props }) {
       >
         <InfoBox
           content="All"
-          click={() => props.setDataShowing("all")}
-          onFocus={() => props.setSortType("")}
+          click={() => dispatch(showTodayData({ dataShow: "all" }))}
+          onFocus={() => dispatch(sortTable({ sortType: "" }))}
           width="50px"
           margin="0px"
           active={dataShowing === "all"}
@@ -55,8 +62,8 @@ function Table({ dataShowing, ...props }) {
         />
         <InfoBox
           content="Today"
-          click={() => props.setDataShowing("today")}
-          onFocus={() => props.setSortType("")}
+          click={() => dispatch(showTodayData({ dataShow: "today" }))}
+          onFocus={() => dispatch(sortTable({ sortType: "" }))}
           width="60px"
           margin="0px"
           active={dataShowing === "today"}
@@ -69,8 +76,10 @@ function Table({ dataShowing, ...props }) {
         <table>
           <thead>
             <tr>
-              <th onClick={() => props.setSortType("countries")}>
-                {props.sortType === "countries" ? (
+              <th
+                onClick={() => dispatch(sortTable({ sortType: "countries" }))}
+              >
+                {sortingType === "countries" ? (
                   <p>Country ▾</p>
                 ) : (
                   <span>Country</span>
@@ -79,8 +88,8 @@ function Table({ dataShowing, ...props }) {
               <th
                 onClick={
                   dataShowing === "all"
-                    ? () => props.setSortType("cases")
-                    : () => props.setSortType("todayCases")
+                    ? () => dispatch(sortTable({ sortType: "cases" }))
+                    : () => dispatch(sortTable({ sortType: "todayCases" }))
                 }
               >
                 {dataShowing === "today" ? (
@@ -88,8 +97,7 @@ function Table({ dataShowing, ...props }) {
                     Today
                   </p>
                 ) : null}
-                {props.sortType === "cases" ||
-                props.sortType === "todayCases" ? (
+                {sortingType === "cases" || sortingType === "todayCases" ? (
                   <p>Cases ▾</p>
                 ) : (
                   <span>Cases</span>
@@ -98,8 +106,8 @@ function Table({ dataShowing, ...props }) {
               <th
                 onClick={
                   dataShowing === "all"
-                    ? () => props.setSortType("recovered")
-                    : () => props.setSortType("todayRecovered")
+                    ? () => dispatch(sortTable({ sortType: "recovered" }))
+                    : () => dispatch(sortTable({ sortType: "todayRecovered" }))
                 }
               >
                 {dataShowing === "today" ? (
@@ -107,8 +115,8 @@ function Table({ dataShowing, ...props }) {
                     Today
                   </p>
                 ) : null}
-                {props.sortType === "recovered" ||
-                props.sortType === "todayRecovered" ? (
+                {sortingType === "recovered" ||
+                sortingType === "todayRecovered" ? (
                   <p>Recovered ▾</p>
                 ) : (
                   <span>Recovered</span>
@@ -117,8 +125,8 @@ function Table({ dataShowing, ...props }) {
               <th
                 onClick={
                   dataShowing === "all"
-                    ? () => props.setSortType("deaths")
-                    : () => props.setSortType("todayDeaths")
+                    ? () => dispatch(sortTable({ sortType: "deaths" }))
+                    : () => dispatch(sortTable({ sortType: "todayDeaths" }))
                 }
               >
                 {dataShowing === "today" ? (
@@ -126,15 +134,14 @@ function Table({ dataShowing, ...props }) {
                     Today
                   </p>
                 ) : null}
-                {props.sortType === "deaths" ||
-                props.sortType === "todayDeaths" ? (
+                {sortingType === "deaths" || sortingType === "todayDeaths" ? (
                   <p>Deaths ▾</p>
                 ) : (
                   <span>Deaths</span>
                 )}
               </th>
-              <th onClick={() => props.setSortType("active")}>
-                {props.sortType === "active" ? (
+              <th onClick={() => dispatch(sortTable({ sortType: "active" }))}>
+                {sortingType === "active" ? (
                   <p>Active ▾</p>
                 ) : (
                   <span>Active</span>

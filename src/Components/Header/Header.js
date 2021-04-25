@@ -5,7 +5,20 @@ import InfoBox from "../../Components/InfoBox";
 
 import "../../Styling/header.css";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  casesTypeCases,
+  casesTypeDeaths,
+  casesTypeRecovered,
+  changeGraphSliderVal,
+  showTodayData,
+  sortTable,
+} from "../../redux/ducks/conRender";
+
 function Header(props) {
+  const dispatch = useDispatch();
+  const casesType = useSelector((state) => state.conRender.casesType);
   const c = props.countries.find((c) => c.name === "WorldWide");
 
   const stickyFunction = () => {
@@ -32,10 +45,10 @@ function Header(props) {
       <button
         className="header__title"
         onClick={() => (
-          props.setCasesType("cases"),
-          props.setDataShowing("all"),
-          props.setGraphSlider({ value: "200" }),
-          props.setSortType(""),
+          dispatch(casesTypeCases()),
+          dispatch(showTodayData({ dataShow: "all" })),
+          dispatch(changeGraphSliderVal({ value: 200 })),
+          // dispatch(sortTable({ sortType: "" })),
           c !== undefined ? props.setCountry(c) : null
         )}
         style={{
@@ -66,8 +79,8 @@ function Header(props) {
         <div className="header__infoBox">
           <InfoBox
             content="Cases"
-            active={props.casesType === "cases"}
-            click={() => props.setCasesType("cases")}
+            active={casesType === "cases"}
+            click={() => dispatch(casesTypeCases())}
             padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(225, 0, 0)"
             margin="1px"
@@ -75,8 +88,8 @@ function Header(props) {
           />
           <InfoBox
             content="Recovered"
-            active={props.casesType === "recovered"}
-            click={() => props.setCasesType("recovered")}
+            active={casesType === "recovered"}
+            click={() => dispatch(casesTypeRecovered())}
             padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(70, 250, 70)"
             margin="1px"
@@ -84,8 +97,8 @@ function Header(props) {
           />
           <InfoBox
             content="Deaths"
-            active={props.casesType === "deaths"}
-            click={() => props.setCasesType("deaths")}
+            active={casesType === "deaths"}
+            click={() => dispatch(casesTypeDeaths())}
             padding={props.isMobile.width < 365 ? "3px" : "10px"}
             activeColor="rgb(50, 50, 50)"
             margin="1px"
