@@ -12,11 +12,10 @@ import Footer from "./Components/Footer";
 import { useSelector } from "react-redux";
 
 function App() {
+  const sortType = useSelector((state) => state.conRender.sortingType);
+
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState({});
-  const sortType = useSelector((state) => state.conRender.sortingType);
-  const [graphSlider, setGraphSlider] = useState({ value: "200" });
-  const [graphsliderMax, setGraphSliderMax] = useState("300");
 
   const isMobile = useWindowSize();
 
@@ -176,36 +175,22 @@ function App() {
           countries={countries}
           changeCountry={onChange}
           country={country}
-          setGraphSlider={setGraphSlider}
           setCountry={setCountry}
           isMobile={isMobile}
         />
       </div>
       <div className="app__body" id="bodyExtension">
         <div className="app__dataLayout">
-          <DataLayout
-            country={country}
-            countries={countries}
-          />
+          <DataLayout country={country} countries={countries} />
         </div>
         <div className="app__map_wrapper">
           <Map countries={countries} country={country} />
         </div>
         <div className="app__graph">
           <div className="app__graph_graph">
-            <LineGraph
-              country={country}
-              setCountry={setCountry}
-              graphSlider={graphSlider}
-              setGraphSlider={setGraphSlider}
-              setSliderMax={setGraphSliderMax}
-            />
+            <LineGraph country={country} setCountry={setCountry} />
           </div>
-          <Slider
-            graphSlider={graphSlider}
-            setGraphSlider={setGraphSlider}
-            sliderMax={graphsliderMax}
-          />
+          <Slider />
         </div>
       </div>
       <div className="app__footer">

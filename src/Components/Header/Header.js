@@ -11,6 +11,7 @@ import {
   casesTypeCases,
   casesTypeDeaths,
   casesTypeRecovered,
+  changeGraphSliderVal,
   showTodayData,
   sortTable,
 } from "../../redux/ducks/conRender";
@@ -46,7 +47,7 @@ function Header(props) {
         onClick={() => (
           dispatch(casesTypeCases()),
           dispatch(showTodayData({ dataShow: "all" })),
-          props.setGraphSlider({ value: "200" }),
+          dispatch(changeGraphSliderVal({ value: 200 })),
           // dispatch(sortTable({ sortType: "" })),
           c !== undefined ? props.setCountry(c) : null
         )}

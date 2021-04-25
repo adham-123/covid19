@@ -6,6 +6,8 @@ const conRender = createSlice({
     casesType: "cases",
     sortingType: "",
     dataShowing: "all",
+    graphSliderValue: 200,
+    graphSliderMaxValue: 300,
   },
   reducers: {
     casesTypeCases: (state) => {
@@ -25,6 +27,13 @@ const conRender = createSlice({
       const { dataShow } = action.payload;
       state.dataShowing = dataShow;
     },
+    changeGraphSliderVal: (state, action) => {
+      const { value } = action.payload;
+      state.graphSliderValue = value;
+    },
+    changeGraphSliderMaxValue: (state, action) => {
+      state.graphSliderMaxValue = action.payload.value;
+    },
   },
 });
 
@@ -34,6 +43,8 @@ export const {
   casesTypeDeaths,
   sortTable,
   showTodayData,
+  changeGraphSliderVal,
+  changeGraphSliderMaxValue,
 } = conRender.actions;
 
 export default conRender.reducer;

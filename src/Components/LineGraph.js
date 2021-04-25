@@ -3,7 +3,11 @@ import { Line } from "react-chartjs-2";
 
 import InfoBox from "./InfoBox";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeGraphSliderMaxValue,
+  changeGraphSliderVal,
+} from "../redux/ducks/conRender";
 
 const nf = new Intl.NumberFormat();
 
@@ -69,6 +73,10 @@ const options = {
 };
 
 function LineGraph({ country, ...props }) {
+  const dispatch = useDispatch();
+  const graphSliderValue = useSelector(
+    (state) => state.conRender.graphSliderValue
+  );
   const [chartData, setChartData] = useState([]);
   const [dataTotal, setDataTotal] = useState([]);
   const [daily, setDaily] = useState(true);
@@ -145,7 +153,7 @@ function LineGraph({ country, ...props }) {
             setChartData(buildChartData(data.timeline, casesType));
             setDataTotal(buildChartTotal(data.timeline, casesType));
             if (chartData) setCName(data.country);
-            props.setGraphSlider({ value: 150 });
+            dispatch(changeGraphSliderVal({ value: 150 }));
           });
       };
       fetchData();
@@ -161,7 +169,7 @@ function LineGraph({ country, ...props }) {
 
             setChartData(buildChartData(data, casesType));
             setDataTotal(buildChartTotal(data, casesType));
-            props.setGraphSlider({ value: 200 });
+            dispatch(changeGraphSliderVal({ value: 200 }));
           });
       };
       fetchAllData();
@@ -171,13 +179,13 @@ function LineGraph({ country, ...props }) {
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
     if (chartData && dataTotal) {
-      props.setSliderMax(chartData.length);
-      let sliderValue = chartData.length - props.graphSlider.value;
+      dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
+      let sliderValue = chartData.length - graphSliderValue;
       let c = chartData.slice(sliderValue, chartData.length);
       props.setCountry({ ...country, timeline: c });
       setTotal(dataTotal.slice(sliderValue, dataTotal.length));
     }
-  }, [props.graphSlider, chartData, dataTotal]);
+  }, [graphSliderValue, chartData, dataTotal]);
 
   const color =
     casesType === "cases"
