@@ -1,13 +1,15 @@
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
-import conrenderReducer from "./ducks/conRender";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import conrenderReducer from "./reducers/conRender";
+import countries from "./reducers/countries";
 import logger from "redux-logger";
+import worldwide from "./reducers/worldwide";
+import selectedCountry from "./reducers/selectedCountry";
 
 const reducer = combineReducers({
   conRender: conrenderReducer,
+  countries: countries,
+  worldwide: worldwide,
+  selectedCountry: selectedCountry,
 });
 
 const firstMiddleware = (store) => (next) => (action) => {
@@ -15,7 +17,7 @@ const firstMiddleware = (store) => (next) => (action) => {
 };
 
 const middleware = (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(firstMiddleware, logger);
+  getDefaultMiddleware().concat(firstMiddleware);
 
 const store = configureStore({
   reducer,
