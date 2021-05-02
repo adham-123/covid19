@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import { useSelector } from "react-redux";
+
 const clearInput = () => {
   document.getElementById("myInput").value = null;
 };
@@ -8,6 +10,8 @@ const fillInput = (country) => {
 };
 
 function DropDown(props) {
+  const countries = useSelector((state) => state.countries.countries);
+
   useEffect(() => {
     fillInput(props.country.name);
   }, [props.country]);
@@ -22,7 +26,7 @@ function DropDown(props) {
         list="dropdown__countries"
         className="header__dropbtn"
         placeholder="Search Country"
-        onChange={props.changeCountry}
+        onChange={() => onchange()}
         onFocus={() => clearInput()}
         onDoubleClick={() => clearInput()}
         onBlur={() => fillInput(props.country.name)}

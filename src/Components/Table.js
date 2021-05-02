@@ -5,14 +5,16 @@ import InfoBox from "./InfoBox";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { showTodayData, sortTable } from "../redux/ducks/conRender";
+import { showTodayData, sortTable } from "../redux/reducers/conRender";
 
 const nf = new Intl.NumberFormat();
 
-function Table({ ...props }) {
+function Table() {
   const dispatch = useDispatch();
   const sortingType = useSelector((state) => state.conRender.sortingType);
   const dataShowing = useSelector((state) => state.conRender.dataShowing);
+  const countries = useSelector((state) => state.countries.countries);
+
   // useEffect(() => {
   //   return function scrollTable() {
   //     var elem = document.getElementById(props.country.name);
@@ -155,7 +157,7 @@ function Table({ ...props }) {
             </tr>
           </thead>
           <tbody>
-            {props.countries.map((country) =>
+            {countries.map((country) =>
               dataShowing === "all" ? (
                 <tr key={country.name} id={country.name}>
                   <td>{country.name}</td>

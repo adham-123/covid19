@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
-} from "../redux/ducks/conRender";
+} from "../redux/reducers/conRender";
+import { changeSelectedCountry } from "../redux/reducers/selectedCountry";
 
 const nf = new Intl.NumberFormat();
 
@@ -72,11 +73,12 @@ const options = {
   },
 };
 
-function LineGraph({ country, ...props }) {
+function LineGraph() {
   const dispatch = useDispatch();
   const graphSliderValue = useSelector(
     (state) => state.conRender.graphSliderValue
   );
+  const selectedCountry = useSelector((state) => state.selectedCountry.country);
   const [chartData, setChartData] = useState([]);
   const [dataTotal, setDataTotal] = useState([]);
   const [daily, setDaily] = useState(true);
@@ -136,10 +138,13 @@ function LineGraph({ country, ...props }) {
   };
 
   useEffect(() => {
-    if (country.name !== "WorldWide" && country.name !== undefined) {
+    if (
+      selectedCountry.name !== "WorldWide" &&
+      selectedCountry.name !== undefined
+    ) {
       const fetchData = async () => {
         await fetch(
-          `https://disease.sh/v3/covid-19/historical/${country.name}?lastdays=all`
+          `https://disease.sh/v3/covid-19/historical/${selectedCountry.name}?lastdays=all`
         )
           .then((response) => response.json())
           .then((data) => {
@@ -174,7 +179,7 @@ function LineGraph({ country, ...props }) {
       };
       fetchAllData();
     }
-  }, [country.name, daily, casesType]);
+  }, [selectedCountry.name, daily, casesType]);
 
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
@@ -182,7 +187,7 @@ function LineGraph({ country, ...props }) {
       dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
       let sliderValue = chartData.length - graphSliderValue;
       let c = chartData.slice(sliderValue, chartData.length);
-      props.setCountry({ ...country, timeline: c });
+      dispatch(changeSelectedCountry({ ...selectedCountry, timeline: c }));
       setTotal(dataTotal.slice(sliderValue, dataTotal.length));
     }
   }, [graphSliderValue, chartData, dataTotal]);
@@ -236,7 +241,7 @@ function LineGraph({ country, ...props }) {
         />
       </div> */}
 
-      {country.timeline?.length > 0 && (
+      {selectedCountry.timeline?.length > 0 && (
         <Line
           options={options}
           data={{
@@ -244,7 +249,7 @@ function LineGraph({ country, ...props }) {
               {
                 backgroundColor: color,
                 borderColor: borderColor,
-                data: country.timeline,
+                data: selectedCountry.timeline,
                 pointRadius: 1,
                 fill: true,
                 label: cName + " " + casesType,

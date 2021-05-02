@@ -9,13 +9,23 @@ import Slider from "./Components/Slider.js";
 import DataLayout from "./Components/DataLayout";
 import Map from "./Components/Map";
 import Footer from "./Components/Footer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import {
+  fetchCountries,
+  pushToCountries,
+  updateCountries,
+} from "./redux/reducers/countries";
+import { fetchWorldwide } from "./redux/reducers/worldwide";
+import { changeSelectedCountry } from "./redux/reducers/selectedCountry";
 
 function App() {
   const sortType = useSelector((state) => state.conRender.sortingType);
+  const worldwide = useSelector((state) => state.worldwide.worldwide);
+  const countries = useSelector((state) => state.countries.countries);
+  const country = useSelector((state) => state.selectedCountry.country);
 
-  const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState({});
+  const dispatch = useDispatch();
 
   const isMobile = useWindowSize();
 
@@ -75,7 +85,7 @@ function App() {
         : sortedData.sort((a, b) => (a > b ? -1 : 1));
     };
     const sorted = sortData(countries);
-    setCountries(sorted);
+    dispatch(updateCountries(sorted));
   }, [sortType]);
 
   const onChange = (event) => {
@@ -83,112 +93,37 @@ function App() {
     let countryS = countries.find((c) => c.name === value);
 
     if (countryS !== undefined) {
-      setCountry(countryS);
+      dispatch(changeSelectedCountry(countryS));
       document.activeElement.blur();
     }
   };
 
   useEffect(() => {
-    const selectedCountry = async () => {
-      await fetch("https://disease.sh/v3/covid-19/all?yesterday=true")
-        .then((response) => response.json())
-        .then((data) => {
-          const worldwide = data;
-          worldwide.name = "WorldWide";
-          worldwide.flag = pic;
-          worldwide.center = {
-            lat: 0,
-            lng: 0,
-          };
-          worldwide.zoom = 1;
-          worldwide.casePerPerson = data.population / data.cases;
-          worldwide.testPerPerson = data.population / data.tests;
-          worldwide.deathPerPerson = data.population / data.deaths;
-          worldwide.timeline = null;
-          // worldwide.todayUpdated = 0;
-          setCountries((countries) => countries.concat(worldwide));
-          setCountry(worldwide);
-        });
-    };
-    selectedCountry();
+    return dispatch(fetchCountries()), dispatch(fetchWorldwide());
   }, []);
 
   useEffect(() => {
-    const selectedCountry = async () => {
-      await fetch(`https://disease.sh/v3/covid-19/countries?yesterday=true`)
-        .then((response) => response.json())
-        .then((data) => {
-          const countriesS = data.map((country) => ({
-            name: country.country,
-            value: country.countryInfo.iso2,
-            cases: country.cases,
-            todayCases: country.todayCases,
-            recovered: country.recovered,
-            todayRecovered: country.todayRecovered,
-            deaths: country.deaths,
-            todayDeaths: country.todayDeaths,
-            flag: country.countryInfo.flag,
-            center: {
-              lat: country.countryInfo.lat,
-              lng: country.countryInfo.long,
-            },
-            zoom: 4,
-            active: country.active,
-            critical: country.critical,
-            tests: country.tests,
-            casePerPerson: country.oneCasePerPeople,
-            testPerPerson: country.oneTestPerPeople,
-            deathPerPerson: country.oneDeathPerPeople,
-            timeline: null,
-            // todayUpdated: 0,
-          }));
-          setCountries((countries) => countries.concat(countriesS));
-        });
-    };
-    selectedCountry();
-  }, []);
-
-  // useEffect(() => {
-  //   const selectedCountry = async () => {
-  //     await fetch("https://disease.sh/v3/covid-19/all?yesterday=false")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         const index = countries.findIndex((e, index) => {
-  //           return e.name === "WorldWide";
-  //         });
-  //         if (countries[index] !== -1 && countries.length > 1) {
-  //           countries[index] = {
-  //             ...countries[index], //spread notation for the selected object
-  //             todayUpdated: data.todayCases,
-  //           };
-  //           setCountries(countries);
-  //         }
-  //       });
-  //   };
-  //   selectedCountry();
-  // }, [country]);
+    return dispatch(
+      pushToCountries(worldwide),
+      dispatch(changeSelectedCountry(worldwide))
+    );
+  }, [worldwide]);
 
   return (
     <div className="app">
       <div className="app__header" id="header">
-        <Header
-          countries={countries}
-          changeCountry={onChange}
-          country={country}
-          setCountry={setCountry}
-          isMobile={isMobile}
-        />
+        <Header changeCountry={onChange} isMobile={isMobile} />
       </div>
       <div className="app__body" id="bodyExtension">
         <div className="app__dataLayout">
-          <DataLayout country={country} countries={countries} />
+          <DataLayout />
         </div>
         <div className="app__map_wrapper">
-          <Map countries={countries} country={country} />
+          <Map />
         </div>
         <div className="app__graph">
           <div className="app__graph_graph">
-            <LineGraph country={country} setCountry={setCountry} />
+            <LineGraph />
           </div>
           <Slider />
         </div>
