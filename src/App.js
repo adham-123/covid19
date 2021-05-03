@@ -4,7 +4,6 @@ import "./Styling/App.css";
 
 import Header from "./Components/Header/Header.js";
 import LineGraph from "./Components/LineGraph";
-import pic from "./Images/earth.jpg";
 import Slider from "./Components/Slider.js";
 import DataLayout from "./Components/DataLayout";
 import Map from "./Components/Map";
@@ -19,11 +18,36 @@ import {
 import { fetchWorldwide } from "./redux/reducers/worldwide";
 import { changeSelectedCountry } from "./redux/reducers/selectedCountry";
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // You can also log the error to an error reporting service
+    // logErrorToMyService(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
 function App() {
   const sortType = useSelector((state) => state.conRender.sortingType);
   const worldwide = useSelector((state) => state.worldwide.worldwide);
   const countries = useSelector((state) => state.countries.countries);
-  const country = useSelector((state) => state.selectedCountry.country);
 
   const dispatch = useDispatch();
 
@@ -88,16 +112,6 @@ function App() {
     dispatch(updateCountries(sorted));
   }, [sortType]);
 
-  const onChange = (event) => {
-    const { value } = event.target;
-    let countryS = countries.find((c) => c.name === value);
-
-    if (countryS !== undefined) {
-      dispatch(changeSelectedCountry(countryS));
-      document.activeElement.blur();
-    }
-  };
-
   useEffect(() => {
     return dispatch(fetchCountries()), dispatch(fetchWorldwide());
   }, []);
@@ -112,24 +126,36 @@ function App() {
   return (
     <div className="app">
       <div className="app__header" id="header">
-        <Header changeCountry={onChange} isMobile={isMobile} />
+        <ErrorBoundary>
+          <Header isMobile={isMobile} />
+        </ErrorBoundary>
       </div>
       <div className="app__body" id="bodyExtension">
         <div className="app__dataLayout">
-          <DataLayout />
+          <ErrorBoundary>
+            <DataLayout />
+          </ErrorBoundary>
         </div>
         <div className="app__map_wrapper">
-          <Map />
+          <ErrorBoundary>
+            <Map />
+          </ErrorBoundary>
         </div>
         <div className="app__graph">
           <div className="app__graph_graph">
-            <LineGraph />
+            <ErrorBoundary>
+              <LineGraph />
+            </ErrorBoundary>
           </div>
-          <Slider />
+          <ErrorBoundary>
+            <Slider />
+          </ErrorBoundary>
         </div>
       </div>
       <div className="app__footer">
-        <Footer />
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+import pic from "../../Images/earth.jpg";
+
 export const fetchWorldwide = createAsyncThunk(
   "worldwide/fetchworldwide",
   async () => {
@@ -21,11 +23,12 @@ const worldwide = createSlice({
     [fetchWorldwide.pending]: (state) => {
       state.loading = true;
     },
+
     [fetchWorldwide.fulfilled]: (state, action) => {
       state.loading = false;
       const worldwide = action.payload;
       worldwide.name = "WorldWide";
-      //   worldwide.flag = pic;
+      worldwide.flag = pic;
       worldwide.center = {
         lat: 0,
         lng: 0,
@@ -40,6 +43,7 @@ const worldwide = createSlice({
       worldwide.timeline = null;
       state.worldwide = worldwide;
     },
+
     [fetchWorldwide.rejected]: (state) => {
       state.loading = false;
     },

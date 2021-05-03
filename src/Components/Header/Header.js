@@ -27,7 +27,7 @@ function Header(props) {
     var header = document.getElementById("myHeader");
     var wholeHeader = document.getElementById("header");
     var body = document.getElementById("bodyExtension");
-    var sticky = header.offsetTop;
+    // var sticky = header.offsetTop;
 
     if (props.isMobile.width < 710) {
       if (window.pageYOffset < 50) {
@@ -71,11 +71,7 @@ function Header(props) {
 
       <div className="header__dd_img" id="myHeader">
         <div className="header__right">
-          <DropDown
-            countries={countries}
-            changeCountry={props.changeCountry}
-            country={selectedCountry}
-          />
+          <DropDown />
         </div>
 
         <div className="header__infoBox">

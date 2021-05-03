@@ -2,7 +2,7 @@ import React from "react";
 
 import "../Styling/dataLayout.css";
 import Table from "../Components/Table.js";
-import PieChart from "./PieChart";
+// import PieChart from "./PieChart";
 
 import { useSelector } from "react-redux";
 

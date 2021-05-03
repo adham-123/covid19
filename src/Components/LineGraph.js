@@ -8,7 +8,10 @@ import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
 } from "../redux/reducers/conRender";
-import { changeSelectedCountry } from "../redux/reducers/selectedCountry";
+import {
+  changeSelectedCountry,
+  changeSelectedCountryTimeline,
+} from "../redux/reducers/selectedCountry";
 
 const nf = new Intl.NumberFormat();
 
@@ -75,10 +78,11 @@ const options = {
 
 function LineGraph() {
   const dispatch = useDispatch();
+  const country = useSelector((state) => state.selectedCountry.country);
+
   const graphSliderValue = useSelector(
     (state) => state.conRender.graphSliderValue
   );
-  const selectedCountry = useSelector((state) => state.selectedCountry.country);
   const [chartData, setChartData] = useState([]);
   const [dataTotal, setDataTotal] = useState([]);
   const [daily, setDaily] = useState(true);
@@ -138,13 +142,10 @@ function LineGraph() {
   };
 
   useEffect(() => {
-    if (
-      selectedCountry.name !== "WorldWide" &&
-      selectedCountry.name !== undefined
-    ) {
+    if (country.name !== "WorldWide" && country.name !== undefined) {
       const fetchData = async () => {
         await fetch(
-          `https://disease.sh/v3/covid-19/historical/${selectedCountry.name}?lastdays=all`
+          `https://disease.sh/v3/covid-19/historical/${country.name}?lastdays=all`
         )
           .then((response) => response.json())
           .then((data) => {
@@ -179,7 +180,7 @@ function LineGraph() {
       };
       fetchAllData();
     }
-  }, [selectedCountry.name, daily, casesType]);
+  }, [country.name, daily, casesType]);
 
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
@@ -187,7 +188,10 @@ function LineGraph() {
       dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
       let sliderValue = chartData.length - graphSliderValue;
       let c = chartData.slice(sliderValue, chartData.length);
-      dispatch(changeSelectedCountry({ ...selectedCountry, timeline: c }));
+      // props.setCountry({ ...country, timeline: c });
+      dispatch(changeSelectedCountry({ ...country, timeline: c }));
+      // dispatch(changeSelectedCountryTimeline(c));
+
       setTotal(dataTotal.slice(sliderValue, dataTotal.length));
     }
   }, [graphSliderValue, chartData, dataTotal]);
@@ -241,33 +245,31 @@ function LineGraph() {
         />
       </div> */}
 
-      {selectedCountry.timeline?.length > 0 && (
-        <Line
-          options={options}
-          data={{
-            datasets: [
-              {
-                backgroundColor: color,
-                borderColor: borderColor,
-                data: selectedCountry.timeline,
-                pointRadius: 1,
-                fill: true,
-                label: cName + " " + casesType,
-                hoverRadius: 5,
-              },
-              // {
-              //   backgroundColor: "rgba(25, 0, 255, 0.7)",
-              //   borderColor: "rgb(25, 0, 255)",
-              //   data: total,
-              //   pointRadius: 1,
-              //   fill: false,
-              //   label: "Total",
-              //   hoverRadius: 5,
-              // },
-            ],
-          }}
-        />
-      )}
+      <Line
+        options={options}
+        data={{
+          datasets: [
+            {
+              backgroundColor: color,
+              borderColor: borderColor,
+              data: country.timeline,
+              pointRadius: 1,
+              fill: true,
+              label: cName + " " + casesType,
+              hoverRadius: 5,
+            },
+            // {
+            //   backgroundColor: "rgba(25, 0, 255, 0.7)",
+            //   borderColor: "rgb(25, 0, 255)",
+            //   data: total,
+            //   pointRadius: 1,
+            //   fill: false,
+            //   label: "Total",
+            //   hoverRadius: 5,
+            // },
+          ],
+        }}
+      />
     </div>
   );
 }
