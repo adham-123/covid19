@@ -8,7 +8,7 @@ import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
 } from "../redux/reducers/conRender";
-import {
+import selectedCountry, {
   changeSelectedCountry,
   changeSelectedCountryTimeline,
 } from "../redux/reducers/selectedCountry";
@@ -157,7 +157,7 @@ function LineGraph() {
             }
 
             setChartData(buildChartData(data.timeline, casesType));
-            setDataTotal(buildChartTotal(data.timeline, casesType));
+            // setDataTotal(buildChartTotal(data.timeline, casesType));
             if (chartData) setCName(data.country);
             dispatch(changeGraphSliderVal({ value: 150 }));
           });
@@ -172,15 +172,16 @@ function LineGraph() {
           .then((data) => {
             data.country = "WorldWide";
             setCName(data.country);
+            console.log(data);
 
             setChartData(buildChartData(data, casesType));
-            setDataTotal(buildChartTotal(data, casesType));
+            // setDataTotal(buildChartTotal(data, casesType));
             dispatch(changeGraphSliderVal({ value: 200 }));
           });
       };
       fetchAllData();
     }
-  }, [country.name, daily, casesType]);
+  }, [country.name, daily]);
 
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
@@ -189,12 +190,12 @@ function LineGraph() {
       let sliderValue = chartData.length - graphSliderValue;
       let c = chartData.slice(sliderValue, chartData.length);
       // props.setCountry({ ...country, timeline: c });
-      dispatch(changeSelectedCountry({ ...country, timeline: c }));
-      // dispatch(changeSelectedCountryTimeline(c));
+      // dispatch(changeSelectedCountry({ ...country, timeline: c }));
+      dispatch(changeSelectedCountryTimeline({ timeline: c }));
 
-      setTotal(dataTotal.slice(sliderValue, dataTotal.length));
+      // setTotal(dataTotal.slice(sliderValue, dataTotal.length));
     }
-  }, [graphSliderValue, chartData, dataTotal]);
+  }, [graphSliderValue, chartData]);
 
   const color =
     casesType === "cases"
