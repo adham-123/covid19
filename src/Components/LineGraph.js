@@ -8,10 +8,12 @@ import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
 } from "../redux/reducers/conRender";
-import selectedCountry, {
-  changeSelectedCountry,
-  changeSelectedCountryTimeline,
-} from "../redux/reducers/selectedCountry";
+
+import {
+  setgraphDataCountry,
+  setgraphDataCases,
+  setgraphDisplayedData,
+} from "../redux/reducers/graphData";
 
 const nf = new Intl.NumberFormat();
 
@@ -80,64 +82,46 @@ function LineGraph() {
   const dispatch = useDispatch();
   const country = useSelector((state) => state.selectedCountry.country);
 
+  const graphCases = useSelector((state) => state.graphData.cases);
+  const graphDeaths = useSelector((state) => state.graphData.deaths);
+  const graphRecovered = useSelector((state) => state.graphData.recovered);
+  const graphDisplayData = useSelector(
+    (state) => state.graphData.displayedData
+  );
+
   const graphSliderValue = useSelector(
     (state) => state.conRender.graphSliderValue
   );
-  const [chartData, setChartData] = useState([]);
-  const [dataTotal, setDataTotal] = useState([]);
-  const [daily, setDaily] = useState(true);
+
   const [cName, setCName] = useState("Loading...");
-  const [total, setTotal] = useState({});
+
   const casesType = useSelector((state) => state.conRender.casesType);
 
-  const buildChartData = (data, casesType = "cases") => {
-    if (data) {
-      let chartData = [];
-      let lastDataPoint;
-      if (data.cases !== undefined) {
-        for (let date in data.cases) {
-          if (lastDataPoint && daily) {
-            let newDataPoint = {
-              x: date,
-              y:
-                data[casesType][date] - lastDataPoint < 0
-                  ? 0
-                  : data[casesType][date] - lastDataPoint,
-            };
-            chartData.push(newDataPoint);
-          }
-          if (lastDataPoint && daily === false) {
-            let newDataPoint = {
-              x: date,
-              y: data[casesType][date] < 0 ? 0 : data[casesType][date],
-            };
-            chartData.push(newDataPoint);
-          }
+  // useEffect(() => {
+  //   casesType === "cases"
+  //     ? dispatch(setgraphDisplayedData({ type: "cases" }))
+  //     : casesType === "recovered"
+  //     ? dispatch(setgraphDisplayedData({ type: "recovered" }))
+  //     : dispatch(setgraphDisplayedData({ type: "deaths" }));
+  // }, [casesType, graphCases, graphRecovered, graphDeaths]);
 
-          lastDataPoint = data[casesType][date];
+  const buildChartData = (data) => {
+    let chartData = [];
+    let lastDataPoint;
+    if (data !== undefined) {
+      for (let date in data) {
+        if (lastDataPoint) {
+          let newDataPoint = {
+            x: date,
+            y: data[date] - lastDataPoint < 0 ? 0 : data[date] - lastDataPoint,
+          };
+          chartData.push(newDataPoint);
         }
-        return chartData;
-      }
-    }
-  };
 
-  const buildChartTotal = (data, casesType = "cases") => {
-    if (data) {
-      let chartData = [];
-      let lastDataPoint;
-      if (data.cases !== undefined) {
-        for (let date in data.cases) {
-          if (lastDataPoint) {
-            let newDataPoint = {
-              x: date,
-              y: data[casesType][date] < 0 ? 0 : data[casesType][date],
-            };
-            chartData.push(newDataPoint);
-          }
-          lastDataPoint = data[casesType][date];
-        }
-        return chartData;
+        lastDataPoint = data[date];
+        // lastDataPoint = data[date] < 0 ? 0 : data[date];
       }
+      return chartData;
     }
   };
 
@@ -156,9 +140,15 @@ function LineGraph() {
               return null;
             }
 
-            setChartData(buildChartData(data.timeline, casesType));
-            // setDataTotal(buildChartTotal(data.timeline, casesType));
-            if (chartData) setCName(data.country);
+            dispatch(
+              setgraphDataCases({
+                cases: buildChartData(data.timeline.cases),
+                recovered: buildChartData(data.timeline.recovered),
+                deaths: buildChartData(data.timeline.deaths),
+              })
+            );
+
+            setCName(data.country);
             dispatch(changeGraphSliderVal({ value: 150 }));
           });
       };
@@ -172,30 +162,40 @@ function LineGraph() {
           .then((data) => {
             data.country = "WorldWide";
             setCName(data.country);
-            console.log(data);
 
-            setChartData(buildChartData(data, casesType));
+            dispatch(setgraphDataCountry(data.country));
+
+            dispatch(
+              setgraphDataCases({
+                cases: buildChartData(data.cases),
+                recovered: buildChartData(data.recovered),
+                deaths: buildChartData(data.deaths),
+              })
+            );
+
+            // setChartData(buildChartData(data, casesType));
             // setDataTotal(buildChartTotal(data, casesType));
             dispatch(changeGraphSliderVal({ value: 200 }));
           });
       };
       fetchAllData();
     }
-  }, [country.name, daily]);
+  }, [country.name]);
 
   //Slider useEffect to so the data showing the value user set on the slider
-  useEffect(() => {
-    if (chartData && dataTotal) {
-      dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
-      let sliderValue = chartData.length - graphSliderValue;
-      let c = chartData.slice(sliderValue, chartData.length);
-      // props.setCountry({ ...country, timeline: c });
-      // dispatch(changeSelectedCountry({ ...country, timeline: c }));
-      dispatch(changeSelectedCountryTimeline({ timeline: c }));
+  // useEffect(() => {
+  //   if (chartData && dataTotal) {
+  //     dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
+  //     let sliderValue = chartData.length - graphSliderValue;
+  //     setChartData(chartData.slice(sliderValue, chartData.length));
+  //     // let c = chartData.slice(sliderValue, chartData.length);
+  //     // props.setCountry({ ...country, timeline: c });
+  //     // dispatch(changeSelectedCountry({ ...country, timeline: c }));
+  //     // dispatch(changeSelectedCountryTimeline({ timeline: c }));
 
-      // setTotal(dataTotal.slice(sliderValue, dataTotal.length));
-    }
-  }, [graphSliderValue, chartData]);
+  //     // setTotal(dataTotal.slice(sliderValue, dataTotal.length));
+  //   }
+  // }, [graphSliderValue]);
 
   const color =
     casesType === "cases"
@@ -253,7 +253,16 @@ function LineGraph() {
             {
               backgroundColor: color,
               borderColor: borderColor,
-              data: country.timeline,
+              data:
+                graphCases.length > 1 &&
+                graphRecovered.length > 1 &&
+                graphDeaths.length > 1
+                  ? casesType === "cases"
+                    ? graphCases
+                    : casesType === "recovered"
+                    ? graphRecovered
+                    : graphDeaths
+                  : null,
               pointRadius: 1,
               fill: true,
               label: cName + " " + casesType,
