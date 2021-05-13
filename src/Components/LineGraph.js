@@ -13,6 +13,7 @@ import {
   setgraphDataCountry,
   setgraphDataCases,
   setgraphDisplayedData,
+  changeGraphDisplaySlice,
 } from "../redux/reducers/graphData";
 
 const nf = new Intl.NumberFormat();
@@ -82,6 +83,7 @@ function LineGraph() {
   const dispatch = useDispatch();
   const country = useSelector((state) => state.selectedCountry.country);
 
+  const graphCountry = useSelector((state) => state.graphData.country);
   const graphCases = useSelector((state) => state.graphData.cases);
   const graphDeaths = useSelector((state) => state.graphData.deaths);
   const graphRecovered = useSelector((state) => state.graphData.recovered);
@@ -93,17 +95,7 @@ function LineGraph() {
     (state) => state.conRender.graphSliderValue
   );
 
-  const [cName, setCName] = useState("Loading...");
-
   const casesType = useSelector((state) => state.conRender.casesType);
-
-  // useEffect(() => {
-  //   casesType === "cases"
-  //     ? dispatch(setgraphDisplayedData({ type: "cases" }))
-  //     : casesType === "recovered"
-  //     ? dispatch(setgraphDisplayedData({ type: "recovered" }))
-  //     : dispatch(setgraphDisplayedData({ type: "deaths" }));
-  // }, [casesType, graphCases, graphRecovered, graphDeaths]);
 
   const buildChartData = (data) => {
     let chartData = [];
@@ -118,12 +110,18 @@ function LineGraph() {
           chartData.push(newDataPoint);
         }
 
-        lastDataPoint = data[date];
-        // lastDataPoint = data[date] < 0 ? 0 : data[date];
+        lastDataPoint = data[date] < 0 ? 0 : data[date];
       }
       return chartData;
     }
   };
+
+  useEffect(() => {
+    dispatch(setgraphDisplayedData({ type: "" }));
+    setTimeout(function () {
+      dispatch(setgraphDisplayedData({ type: casesType }));
+    }, []);
+  }, [casesType, graphCountry]);
 
   useEffect(() => {
     if (country.name !== "WorldWide" && country.name !== undefined) {
@@ -140,6 +138,8 @@ function LineGraph() {
               return null;
             }
 
+            dispatch(setgraphDataCountry(data.country));
+
             dispatch(
               setgraphDataCases({
                 cases: buildChartData(data.timeline.cases),
@@ -148,7 +148,6 @@ function LineGraph() {
               })
             );
 
-            setCName(data.country);
             dispatch(changeGraphSliderVal({ value: 150 }));
           });
       };
@@ -161,7 +160,6 @@ function LineGraph() {
           .then((response) => response.json())
           .then((data) => {
             data.country = "WorldWide";
-            setCName(data.country);
 
             dispatch(setgraphDataCountry(data.country));
 
@@ -183,19 +181,26 @@ function LineGraph() {
   }, [country.name]);
 
   //Slider useEffect to so the data showing the value user set on the slider
-  // useEffect(() => {
-  //   if (chartData && dataTotal) {
-  //     dispatch(changeGraphSliderMaxValue({ value: chartData.length }));
-  //     let sliderValue = chartData.length - graphSliderValue;
-  //     setChartData(chartData.slice(sliderValue, chartData.length));
-  //     // let c = chartData.slice(sliderValue, chartData.length);
-  //     // props.setCountry({ ...country, timeline: c });
-  //     // dispatch(changeSelectedCountry({ ...country, timeline: c }));
-  //     // dispatch(changeSelectedCountryTimeline({ timeline: c }));
+  useEffect(() => {
+    if (graphDisplayData) {
+      let maxValue =
+        casesType == "cases"
+          ? graphCases.length
+          : casesType == "recovered"
+          ? graphRecovered.length
+          : graphDeaths.length;
+      dispatch(
+        changeGraphSliderMaxValue({
+          value: maxValue,
+        })
+      );
+      let sliderValue = maxValue - graphSliderValue;
 
-  //     // setTotal(dataTotal.slice(sliderValue, dataTotal.length));
-  //   }
-  // }, [graphSliderValue]);
+      dispatch(
+        changeGraphDisplaySlice({ sliderValue: sliderValue, type: casesType })
+      );
+    }
+  }, [graphSliderValue, graphCases, graphRecovered, graphDeaths]);
 
   const color =
     casesType === "cases"
@@ -253,19 +258,10 @@ function LineGraph() {
             {
               backgroundColor: color,
               borderColor: borderColor,
-              data:
-                graphCases.length > 1 &&
-                graphRecovered.length > 1 &&
-                graphDeaths.length > 1
-                  ? casesType === "cases"
-                    ? graphCases
-                    : casesType === "recovered"
-                    ? graphRecovered
-                    : graphDeaths
-                  : null,
+              data: graphDisplayData.length > 1 ? graphDisplayData : null,
               pointRadius: 1,
               fill: true,
-              label: cName + " " + casesType,
+              label: graphCountry + " " + casesType,
               hoverRadius: 5,
             },
             // {
