@@ -176,7 +176,6 @@ function LineGraph() {
 
   useEffect(() => {
     let sliderValue = graphSliderMaxValue - graphSliderValue;
-    dispatch(setgraphDisplayedData({ type: "" }));
     setTimeout(function () {
       dispatch(
         changeGraphDisplayData({
@@ -186,14 +185,7 @@ function LineGraph() {
         })
       );
     }, []);
-  }, [
-    casesType,
-    graphCountry,
-    graphSliderValue,
-    graphCases,
-    graphRecovered,
-    graphDeaths,
-  ]);
+  }, [graphSliderValue]);
 
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
@@ -213,6 +205,18 @@ function LineGraph() {
           value: maxValue,
         })
       );
+
+      dispatch(setgraphDisplayedData({ type: "" }));
+      let sliderValue = graphSliderMaxValue - graphSliderValue;
+      setTimeout(function () {
+        dispatch(
+          changeGraphDisplayData({
+            sliderValue: sliderValue,
+            type: casesType,
+            maxValue: graphSliderMaxValue,
+          })
+        );
+      }, []);
     }
   }, [graphCases, graphRecovered, graphDeaths, graphCountry, casesType]);
 
