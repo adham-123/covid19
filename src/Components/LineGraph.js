@@ -13,7 +13,7 @@ import {
   setgraphDataCountry,
   setgraphDataCases,
   setgraphDisplayedData,
-  changeGraphDisplaySlice,
+  changeGraphDisplayData,
 } from "../redux/reducers/graphData";
 
 const nf = new Intl.NumberFormat();
@@ -94,6 +94,9 @@ function LineGraph() {
   const graphSliderValue = useSelector(
     (state) => state.conRender.graphSliderValue
   );
+  const graphSliderMaxValue = useSelector(
+    (state) => state.conRender.graphSliderMaxValue
+  );
 
   const casesType = useSelector((state) => state.conRender.casesType);
 
@@ -115,13 +118,6 @@ function LineGraph() {
       return chartData;
     }
   };
-
-  useEffect(() => {
-    dispatch(setgraphDisplayedData({ type: "" }));
-    setTimeout(function () {
-      dispatch(setgraphDisplayedData({ type: casesType }));
-    }, []);
-  }, [casesType, graphCountry]);
 
   useEffect(() => {
     if (country.name !== "WorldWide" && country.name !== undefined) {
@@ -171,8 +167,6 @@ function LineGraph() {
               })
             );
 
-            // setChartData(buildChartData(data, casesType));
-            // setDataTotal(buildChartTotal(data, casesType));
             dispatch(changeGraphSliderVal({ value: 200 }));
           });
       };
@@ -180,9 +174,34 @@ function LineGraph() {
     }
   }, [country.name]);
 
+  useEffect(() => {
+    let sliderValue = graphSliderMaxValue - graphSliderValue;
+    dispatch(setgraphDisplayedData({ type: "" }));
+    setTimeout(function () {
+      dispatch(
+        changeGraphDisplayData({
+          sliderValue: sliderValue,
+          type: casesType,
+          maxValue: graphSliderMaxValue,
+        })
+      );
+    }, []);
+  }, [
+    casesType,
+    graphCountry,
+    graphSliderValue,
+    graphCases,
+    graphRecovered,
+    graphDeaths,
+  ]);
+
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
     if (graphDisplayData) {
+      graphCountry == "WorldWide"
+        ? dispatch(changeGraphSliderVal({ value: 200 }))
+        : dispatch(changeGraphSliderVal({ value: 150 }));
+
       let maxValue =
         casesType == "cases"
           ? graphCases.length
@@ -194,13 +213,8 @@ function LineGraph() {
           value: maxValue,
         })
       );
-      let sliderValue = maxValue - graphSliderValue;
-
-      dispatch(
-        changeGraphDisplaySlice({ sliderValue: sliderValue, type: casesType })
-      );
     }
-  }, [graphSliderValue, graphCases, graphRecovered, graphDeaths]);
+  }, [graphCases, graphRecovered, graphDeaths, graphCountry, casesType]);
 
   const color =
     casesType === "cases"
