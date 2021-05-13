@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../Styling/table.css";
 import InfoBox from "./InfoBox";
@@ -157,9 +157,9 @@ function Table() {
             </tr>
           </thead>
           <tbody>
-            {countries.map((country) =>
+            {countries.map((country, index) =>
               dataShowing === "all" ? (
-                <tr key={country.name} id={country.name}>
+                <tr key={index} id={country.name}>
                   <td>{country.name}</td>
                   <td>{nf.format(country.cases)}</td>
                   <td>{nf.format(country.recovered)}</td>
@@ -172,7 +172,7 @@ function Table() {
                   <td>{nf.format(country.testPerPerson)}</td>
                 </tr>
               ) : (
-                <tr key={country.name} id={country.name}>
+                <tr key={index} id={country.name}>
                   <td>{country.name}</td>
                   <td>{nf.format(country.todayCases)}</td>
                   <td>{nf.format(country.todayRecovered)}</td>

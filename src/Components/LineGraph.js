@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
-
-import InfoBox from "./InfoBox";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
 } from "../redux/reducers/conRender";
-
 import {
   setgraphDataCountry,
   setgraphDataCases,
-  setgraphDisplayedData,
+  emptyUpGraphDisplayData,
   changeGraphDisplayData,
 } from "../redux/reducers/graphData";
 
@@ -21,9 +18,6 @@ const nf = new Intl.NumberFormat();
 const options = {
   animation: {
     duration: 0,
-  },
-  hover: {
-    animationDuration: 0,
   },
   responsiveAnimationDuration: 0,
   legend: {
@@ -50,6 +44,7 @@ const options = {
   hover: {
     mode: "index",
     intersect: true,
+    animationDuration: 0,
   },
   scales: {
     xAxes: [
@@ -184,20 +179,20 @@ function LineGraph() {
           maxValue: graphSliderMaxValue,
         })
       );
-    }, []);
+    });
   }, [graphSliderValue]);
 
   //Slider useEffect to so the data showing the value user set on the slider
   useEffect(() => {
     if (graphDisplayData) {
-      graphCountry == "WorldWide"
+      graphCountry === "WorldWide"
         ? dispatch(changeGraphSliderVal({ value: 200 }))
         : dispatch(changeGraphSliderVal({ value: 150 }));
 
       let maxValue =
-        casesType == "cases"
+        casesType === "cases"
           ? graphCases.length
-          : casesType == "recovered"
+          : casesType === "recovered"
           ? graphRecovered.length
           : graphDeaths.length;
       dispatch(
@@ -206,7 +201,7 @@ function LineGraph() {
         })
       );
 
-      dispatch(setgraphDisplayedData({ type: "" }));
+      dispatch(emptyUpGraphDisplayData({ type: "" }));
       let sliderValue = graphSliderMaxValue - graphSliderValue;
       setTimeout(function () {
         dispatch(
@@ -216,7 +211,7 @@ function LineGraph() {
             maxValue: graphSliderMaxValue,
           })
         );
-      }, []);
+      });
     }
   }, [graphCases, graphRecovered, graphDeaths, graphCountry, casesType]);
 

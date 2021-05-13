@@ -1,11 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-// export const fetchGraphData = createAsyncThunk(
-//     "graphData/fetchGraphData",
-//     asynd () => {
-//         const res = await fetch()
-//     }
-// )
+import { createSlice } from "@reduxjs/toolkit";
 
 const graphData = createSlice({
   name: "graphData",
@@ -27,17 +20,8 @@ const graphData = createSlice({
       state.recovered = recovered;
       state.deaths = deaths;
     },
-    setgraphDisplayedData: (state, action) => {
-      const { type } = action.payload;
-
-      state.displayedData =
-        type == "cases"
-          ? [...state.cases]
-          : type == "recovered"
-          ? [...state.recovered]
-          : type == "deaths"
-          ? [...state.deaths]
-          : [];
+    emptyUpGraphDisplayData: (state, action) => {
+      state.displayedData = [];
     },
     changeGraphDisplayData: (state, action) => {
       const { sliderValue, type, maxValue } = action.payload;
@@ -53,7 +37,7 @@ const graphData = createSlice({
 export const {
   setgraphDataCountry,
   setgraphDataCases,
-  setgraphDisplayedData,
+  emptyUpGraphDisplayData,
   changeGraphDisplayData,
 } = graphData.actions;
 

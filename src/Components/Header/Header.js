@@ -42,6 +42,10 @@ function Header(props) {
     }
   };
 
+  window.onscroll = () => {
+    stickyFunction();
+  };
+
   return (
     <div className="header">
       <button
@@ -104,11 +108,6 @@ function Header(props) {
           />
         </div>
       </div>
-      {
-        (window.onscroll = () => {
-          stickyFunction();
-        })
-      }
     </div>
   );
 }

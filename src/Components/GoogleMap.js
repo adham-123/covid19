@@ -122,16 +122,16 @@ function Maps(props) {
         }}
       >
         <>
-          {props.countries.map((country) => (
+          {props.countries.map((country, index) => (
             <CircleComponent
               setShowingInfoWindow={setShowingInfoWindow}
               setCurrentCountry={setCurrentCountry}
               country={country}
-              key={country.name}
               showingInfoWindow={showingInfoWindow}
               currentZoom={currentZoom}
               casesType={props.casesType}
               onClose={onClose}
+              key={index}
             />
           ))}
 
