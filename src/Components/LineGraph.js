@@ -229,6 +229,14 @@ function LineGraph() {
       ? "rgb(0, 200, 50)"
       : "rgb(100, 100, 100)";
 
+  if (graphCountry !== country.name) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
