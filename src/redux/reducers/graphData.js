@@ -25,9 +25,9 @@ const graphData = createSlice({
     },
     changeGraphDisplayData: (state, action) => {
       const { sliderValue, type, maxValue } = action.payload;
-      type == "cases"
+      type === "cases"
         ? (state.displayedData = state.cases.slice(sliderValue, maxValue))
-        : type == "recovered"
+        : type === "recovered"
         ? (state.displayedData = state.recovered.slice(sliderValue, maxValue))
         : (state.displayedData = state.deaths.slice(sliderValue, maxValue));
     },
