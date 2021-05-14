@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../Styling/table.css";
 import InfoBox from "./InfoBox";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { showTodayData, sortTable } from "../redux/ducks/conRender";
+import { showTodayData, sortTable } from "../redux/reducers/conRender";
 
 const nf = new Intl.NumberFormat();
 
-function Table({ ...props }) {
+function Table() {
   const dispatch = useDispatch();
   const sortingType = useSelector((state) => state.conRender.sortingType);
   const dataShowing = useSelector((state) => state.conRender.dataShowing);
+  const countries = useSelector((state) => state.countries.countries);
+
   // useEffect(() => {
   //   return function scrollTable() {
   //     var elem = document.getElementById(props.country.name);
@@ -155,9 +157,9 @@ function Table({ ...props }) {
             </tr>
           </thead>
           <tbody>
-            {props.countries.map((country) =>
+            {countries.map((country, index) =>
               dataShowing === "all" ? (
-                <tr key={country.name} id={country.name}>
+                <tr key={index} id={country.name}>
                   <td>{country.name}</td>
                   <td>{nf.format(country.cases)}</td>
                   <td>{nf.format(country.recovered)}</td>
@@ -170,7 +172,7 @@ function Table({ ...props }) {
                   <td>{nf.format(country.testPerPerson)}</td>
                 </tr>
               ) : (
-                <tr key={country.name} id={country.name}>
+                <tr key={index} id={country.name}>
                   <td>{country.name}</td>
                   <td>{nf.format(country.todayCases)}</td>
                   <td>{nf.format(country.todayRecovered)}</td>

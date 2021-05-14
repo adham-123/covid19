@@ -2,7 +2,9 @@ import React from "react";
 
 import "../Styling/dataLayout.css";
 import Table from "../Components/Table.js";
-import PieChart from "./PieChart";
+// import PieChart from "./PieChart";
+
+import { useSelector } from "react-redux";
 
 const nf = new Intl.NumberFormat();
 
@@ -23,7 +25,8 @@ function nFormatter(num) {
   );
 }
 
-function DataLayout({ country, countries }) {
+function DataLayout() {
+  const selectedCountry = useSelector((state) => state.selectedCountry.country);
   return (
     <div className="dataLayout">
       <div className="datalayout__overview">
@@ -47,8 +50,8 @@ function DataLayout({ country, countries }) {
             }}
           >
             <b style={{ fontSize: "22px", fontFamily: "cursive" }}>
-              {country.name}
-            </b>{" "}
+              {selectedCountry.name}
+            </b>
             Overview
           </p>
         </div>
@@ -60,11 +63,11 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Cases <br />
               <span className="datalayout__overview_boldnumber">
-                {nFormatter(country.cases)}
-              </span>{" "}
+                {nFormatter(selectedCountry.cases)}
+              </span>
               <br />
               <span className="datalayout__overview_dailynumber">
-                + {nf.format(country.todayCases)}
+                + {nf.format(selectedCountry.todayCases)}
               </span>
             </p>
           </div>
@@ -72,11 +75,11 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Recovered <br />
               <span className="datalayout__overview_boldnumber">
-                {nFormatter(country.recovered)}
+                {nFormatter(selectedCountry.recovered)}
               </span>{" "}
               <br />
               <span className="datalayout__overview_dailynumber">
-                + {nf.format(country.todayRecovered)}
+                + {nf.format(selectedCountry.todayRecovered)}
               </span>
             </p>
           </div>
@@ -84,11 +87,11 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Deaths <br />
               <span className="datalayout__overview_boldnumber">
-                {nFormatter(country.deaths)}
+                {nFormatter(selectedCountry.deaths)}
               </span>{" "}
               <br />
               <span className="datalayout__overview_dailynumber">
-                + {nf.format(country.todayDeaths)}
+                + {nf.format(selectedCountry.todayDeaths)}
               </span>
             </p>
           </div>
@@ -101,7 +104,7 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Active <br />{" "}
               <span className="datalayout__overview_number">
-                {nFormatter(country.active)}
+                {nFormatter(selectedCountry.active)}
               </span>
             </p>
           </div>
@@ -109,7 +112,7 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Critical <br />{" "}
               <span className="datalayout__overview_number">
-                {nFormatter(country.critical)}
+                {nFormatter(selectedCountry.critical)}
               </span>
             </p>
           </div>
@@ -117,7 +120,7 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Tests <br />{" "}
               <span className="datalayout__overview_number">
-                {nFormatter(country.tests)}
+                {nFormatter(selectedCountry.tests)}
               </span>
             </p>
           </div>
@@ -130,15 +133,15 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Case/Person <br />{" "}
               <span className="datalayout__overview_number">
-                {nFormatter(country.casePerPerson)}
+                {nFormatter(selectedCountry.casePerPerson)}
               </span>
             </p>
           </div>
           <div className="datalayout__overview_box">
             <p className="datalayout__overview_title">
-              Test/Person <br />{" "}
+              Test/Person <br />
               <span className="datalayout__overview_number">
-                {nFormatter(country.testPerPerson)}
+                {nFormatter(selectedCountry.testPerPerson)}
               </span>
             </p>
           </div>
@@ -146,7 +149,7 @@ function DataLayout({ country, countries }) {
             <p className="datalayout__overview_title">
               Deaths/Person <br />{" "}
               <span className="datalayout__overview_number">
-                {nFormatter(country.deathPerPerson)}
+                {nFormatter(selectedCountry.deathPerPerson)}
               </span>
             </p>
           </div>
@@ -159,10 +162,7 @@ function DataLayout({ country, countries }) {
         </p>
       </div>
       <div className="datalayout__table">
-        <Table
-          countries={countries}
-          country={country}
-        />
+        <Table />
       </div>
       {/* <div className="datalayout__graph_pie">
         <PieChart countries={countries} casesType={casesType} />

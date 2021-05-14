@@ -4,8 +4,11 @@ import Maps from "./GoogleMap.js";
 
 import { useSelector } from "react-redux";
 
-function Map(props) {
+function Map() {
+  const countries = useSelector((state) => state.countries.countries);
+  const selectedCountry = useSelector((state) => state.selectedCountry.country);
   const casesType = useSelector((state) => state.conRender.casesType);
+
   const color =
     casesType === "cases"
       ? "rgba(200, 20, 50, 0.5)"
@@ -26,8 +29,8 @@ function Map(props) {
       </div>
       <div style={{ position: "relative", height: "250px", width: "100%" }}>
         <Maps
-          countries={props.countries}
-          country={props.country}
+          countries={countries}
+          country={selectedCountry}
           casesType={casesType}
         />
       </div>

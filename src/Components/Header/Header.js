@@ -13,19 +13,21 @@ import {
   casesTypeRecovered,
   changeGraphSliderVal,
   showTodayData,
-  sortTable,
-} from "../../redux/ducks/conRender";
+} from "../../redux/reducers/conRender";
+import { changeSelectedCountry } from "../../redux/reducers/selectedCountry";
 
 function Header(props) {
   const dispatch = useDispatch();
   const casesType = useSelector((state) => state.conRender.casesType);
-  const c = props.countries.find((c) => c.name === "WorldWide");
+  const countries = useSelector((state) => state.countries.countries);
+  const selectedCountry = useSelector((state) => state.selectedCountry.country);
+  const c = countries.find((c) => c.name === "WorldWide");
 
   const stickyFunction = () => {
     var header = document.getElementById("myHeader");
     var wholeHeader = document.getElementById("header");
     var body = document.getElementById("bodyExtension");
-    var sticky = header.offsetTop;
+    // var sticky = header.offsetTop;
 
     if (props.isMobile.width < 710) {
       if (window.pageYOffset < 50) {
@@ -40,6 +42,10 @@ function Header(props) {
     }
   };
 
+  window.onscroll = () => {
+    stickyFunction();
+  };
+
   return (
     <div className="header">
       <button
@@ -49,7 +55,7 @@ function Header(props) {
           dispatch(showTodayData({ dataShow: "all" })),
           dispatch(changeGraphSliderVal({ value: 200 })),
           // dispatch(sortTable({ sortType: "" })),
-          c !== undefined ? props.setCountry(c) : null
+          c !== undefined ? dispatch(changeSelectedCountry(c)) : null
         )}
         style={{
           border: "0px",
@@ -62,18 +68,14 @@ function Header(props) {
       </button>
 
       <img
-        alt={`${props.country.name} Flag`}
-        src={props.country.flag}
+        alt={`${selectedCountry.name} Flag`}
+        src={selectedCountry.flag}
         className="header_image"
       />
 
       <div className="header__dd_img" id="myHeader">
         <div className="header__right">
-          <DropDown
-            countries={props.countries}
-            changeCountry={props.changeCountry}
-            country={props.country}
-          />
+          <DropDown />
         </div>
 
         <div className="header__infoBox">
@@ -106,11 +108,6 @@ function Header(props) {
           />
         </div>
       </div>
-      {
-        (window.onscroll = () => {
-          stickyFunction();
-        })
-      }
     </div>
   );
 }
