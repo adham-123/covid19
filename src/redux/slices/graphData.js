@@ -11,6 +11,7 @@ const graphData = createSlice({
   },
 
   reducers: {
+    getGraphData() {},
     setgraphDataCountry: (state, action) => {
       state.country = action.payload;
     },
@@ -39,6 +40,7 @@ export const {
   setgraphDataCases,
   emptyUpGraphDisplayData,
   changeGraphDisplayData,
+  getGraphData,
 } = graphData.actions;
 
 export default graphData.reducer;

@@ -1,10 +1,15 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import conrenderReducer from "./reducers/conRender";
-import countries from "./reducers/countries";
-import logger from "redux-logger";
-import worldwide from "./reducers/worldwide";
-import selectedCountry from "./reducers/selectedCountry";
-import graphData from "./reducers/graphData";
+import createSagaMiddleware from "redux-saga";
+// import logger from "redux-logger";
+
+import conrenderReducer from "./slices/conRender";
+import countries from "./slices/countries";
+import worldwide from "./slices/worldwide";
+import selectedCountry from "./slices/selectedCountry";
+import graphData from "./slices/graphData";
+import { watcherSaga } from "./sagas/rootSaga";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const reducer = combineReducers({
   conRender: conrenderReducer,
@@ -18,12 +23,18 @@ const firstMiddleware = (store) => (next) => (action) => {
   return next(action);
 };
 
-const middleware = (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(firstMiddleware);
+const middleware = (getDefaultMiddleware) => [
+  ...getDefaultMiddleware(),
+  firstMiddleware,
+  sagaMiddleware,
+  // logger,
+];
 
 const store = configureStore({
-  reducer,
-  middleware,
+  reducer: reducer,
+  // devTools: process.env.NODE_ENV !== "production",
+  middleware: middleware,
 });
+sagaMiddleware.run(watcherSaga);
 
 export default store;

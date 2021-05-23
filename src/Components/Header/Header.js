@@ -13,8 +13,8 @@ import {
   casesTypeRecovered,
   changeGraphSliderVal,
   showTodayData,
-} from "../../redux/reducers/conRender";
-import { changeSelectedCountry } from "../../redux/reducers/selectedCountry";
+} from "../../redux/slices/conRender";
+import { changeSelectedCountry } from "../../redux/slices/selectedCountry";
 
 function Header(props) {
   const dispatch = useDispatch();

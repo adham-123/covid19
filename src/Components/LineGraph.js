@@ -5,13 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeGraphSliderMaxValue,
   changeGraphSliderVal,
-} from "../redux/reducers/conRender";
+} from "../redux/slices/conRender";
 import {
   setgraphDataCountry,
   setgraphDataCases,
   emptyUpGraphDisplayData,
   changeGraphDisplayData,
-} from "../redux/reducers/graphData";
+} from "../redux/slices/graphData";
 
 const nf = new Intl.NumberFormat();
 

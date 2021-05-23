@@ -5,7 +5,7 @@ import InfoBox from "./InfoBox";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { showTodayData, sortTable } from "../redux/reducers/conRender";
+import { showTodayData, sortTable } from "../redux/slices/conRender";
 
 const nf = new Intl.NumberFormat();
 

@@ -3,7 +3,7 @@ import React from "react";
 import "../Styling/slider.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import { changeGraphSliderVal } from "../redux/reducers/conRender";
+import { changeGraphSliderVal } from "../redux/slices/conRender";
 
 function Slider(props) {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { changeSelectedCountry } from "../../redux/reducers/selectedCountry";
+import { changeSelectedCountry } from "../../redux/slices/selectedCountry";
 
 const clearInput = () => {
   document.getElementById("myInput").value = null;

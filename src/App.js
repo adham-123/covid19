@@ -14,9 +14,9 @@ import {
   fetchCountries,
   pushToCountries,
   updateCountries,
-} from "./redux/reducers/countries";
-import { fetchWorldwide } from "./redux/reducers/worldwide";
-import { changeSelectedCountry } from "./redux/reducers/selectedCountry";
+} from "./redux/slices/countries";
+import { fetchWorldwide } from "./redux/slices/worldwide";
+import { changeSelectedCountry } from "./redux/slices/selectedCountry";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
