@@ -1,13 +1,31 @@
 import { call, put } from "redux-saga/effects";
 import { setgraphDataCases } from "../../slices/graphData";
-import { requestGetChartData } from "../requests/countryChartData";
+import {
+  requestGetChartDataCountry,
+  requestGetChartDataWorldWide,
+} from "../requests/countryChartData";
 
-export function* handleGetChartData(action) {
+function* handleGetChartDataCountry(action) {
   try {
-    const response = yield call(requestGetChartData);
+    const { payload } = action;
+    const { countryName } = payload;
+    const response = yield call(requestGetChartDataCountry, countryName);
     const { data } = response;
-    yield put(setgraphDataCases({ ...data }));
-  } catch (error) {
-    console.log(error);
+    // yield put(setgraphDataCases({ ...data }));
+    console.log(data);
+  } catch (err) {
+    console.log(err);
   }
 }
+
+function* handleGetChartDataCountryWorldWide() {
+  try {
+    const response = yield call(requestGetChartDataWorldWide);
+    const { data } = response;
+    yield put(setgraphDataCases({ ...data }));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { handleGetChartDataCountry, handleGetChartDataCountryWorldWide };

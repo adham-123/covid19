@@ -11,6 +11,7 @@ import {
   setgraphDataCases,
   emptyUpGraphDisplayData,
   changeGraphDisplayData,
+  getGraphData,
 } from "../redux/slices/graphData";
 
 const nf = new Intl.NumberFormat();
@@ -113,6 +114,10 @@ function LineGraph() {
       return chartData;
     }
   };
+
+  useEffect(() => {
+    dispatch(getGraphData({ countryName: country.name }));
+  }, [country, dispatch]);
 
   useEffect(() => {
     if (country.name !== "WorldWide" && country.name !== undefined) {
